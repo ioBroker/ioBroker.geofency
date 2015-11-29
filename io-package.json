@@ -10,7 +10,7 @@
         "extIcon":                  "https://raw.githubusercontent.com/dschaedl/ioBroker.geofency/master/admin/geofency.png",
         "license":                  "MIT",
         "npmLibs": [],
-        "type":                     "script",
+        "type":                     "hardware",
         "loglevel":                 "info",
         "localLink":                "http://%ip%:%port%",
         "nondeletable":             true

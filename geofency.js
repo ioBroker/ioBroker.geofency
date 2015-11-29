@@ -1,29 +1,7 @@
 /**
  *
- * example adapter
- *
- *
- *  file io-package.json comments:
- *
- *  {
- *      "common": {
- *          "name":         "example",                  // name has to be set and has to be equal to adapters folder name and main file name excluding extension
- *          "version":      "0.0.0",                    // use "Semantic Versioning"! see http://semver.org/
- *          "title":        "Node.js Example Adapter",  // Adapter title shown in User Interfaces
- *          "authors":  [                               // Array of authord
- *              "name <mail@example.com>"
- *          ]
- *          "desc":         "Example adapter",          // Adapter description shown in User Interfaces. Can be a language object {de:"...",ru:"..."} or a string
- *          "platform":     "Javascript/Node.js",       // possible values "javascript", "javascript/Node.js" - more coming
- *          "mode":         "daemon",                   // possible values "daemon", "schedule", "subscribe"
- *          "schedule":     "0 0 * * *"                 // cron-style schedule. Only needed if mode=schedule
- *          "loglevel":     "info"                      // Adapters Log Level
- *      },
- *      "native": {                                     // the native object is available via adapter.config in your adapters code - use it for configuration
- *          "test1": true,
- *          "test2": 42
- *      }
- *  }
+ * geofency adapter
+ * This Adapter is currently a copy of the ccu.io geofency adapter and adapted to ioBroker
  *
  */
 
@@ -121,7 +99,7 @@ function main() {
 
     app.use(expressBasicAuth(adapter.config.user, adapter.config.pass));
 
-    if (adapter.config.ssl) {
+    if (adapter.config.ssl === 'checked') {
         var fs = require('fs');
         var server = require('https').createServer({
             key: fs.readFileSync(__dirname+'/cert/privatekey.pem'),
