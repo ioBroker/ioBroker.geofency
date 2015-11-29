@@ -1,0 +1,27 @@
+{
+    "common": {
+        "name":                     "geofency",
+        "version":                  "0.0.1",
+        "title":                    "Node.js geofency Adapter",
+        "desc":                     "listening for geofency events",
+        "platform":                 "Javascript/Node.js",
+        "mode":                     "daemon",
+        "icon":                     "geofency.png",
+        "extIcon":                  "https://raw.githubusercontent.com/dschaedl/ioBroker.geofency/master/admin/geofency.png",
+        "license":                  "MIT",
+        "npmLibs": [],
+        "type":                     "script",
+        "loglevel":                 "info",
+        "localLink":                "http://%ip%:%port%",
+        "nondeletable":             true
+    },
+    "native": {
+        "port": 7999,
+        "ssl": false,
+        "user": "geo",
+        "pass": "geo"
+    },
+    "objects": [
+
+    ]
+}
