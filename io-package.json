@@ -3,17 +3,19 @@
         "name":                     "geofency",
         "version":                  "0.0.1",
         "title":                    "Node.js geofency Adapter",
-        "desc":                     "listening for geofency events",
+        "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
         "icon":                     "geofency.png",
         "extIcon":                  "https://raw.githubusercontent.com/dschaedl/ioBroker.geofency/master/admin/geofency.png",
+        "readme":                   "https://github.com/ioBroker/dschaedl/ioBroker.geofency/blob/master/README.md",
         "license":                  "MIT",
         "npmLibs": [],
         "type":                     "hardware",
+        "keywords":                 ["iobroker", "server", "geofency", "mobile app"],
         "loglevel":                 "info",
-        "localLink":                "http://%ip%:%port%",
-        "nondeletable":             true
+        "enabled":                  true,
+        "localLink":                "http://%ip%:%port%"
     },
     "native": {
         "port": 7999,

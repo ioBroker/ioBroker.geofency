@@ -16,9 +16,7 @@
     "url": "https://github.com/dschaedl/ioBroker.geofency"
   },
   "dependencies": {
-    "node-schedule": "^0.5.1",
-    "request": "^2.65.0",
-    "suncalc": "^1.7.0"
+    "request": "^2.65.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

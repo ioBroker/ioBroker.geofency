@@ -1,7 +1,7 @@
 /**
  *
  * geofency adapter
- * This Adapter is currently a copy of the ccu.io geofency adapter and adapted to ioBroker
+ * This Adapter is based on the geofency adapter of ccu.io
  *
  */
 
@@ -88,13 +88,6 @@ function main() {
     }
 }
 
-//default settings: {
-//    "port":   8080,
-//    "auth":   false,
-//    "secure": false,
-//    "bind":   "0.0.0.0", // "::"
-//    "cache":  false
-//}
 function initWebServer(settings) {
 
     var server = {
@@ -150,7 +143,7 @@ function requestProcessor(req, res) {
         });
 
         req.on('end', function () {
-            var id = req.path.slice(1);
+            var id = req.url.slice(1);
             var jbody = JSON.parse(body);
 
             adapter.log.info("adapter geofency received webhook from device " + id + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
@@ -195,7 +188,7 @@ function createObjects(id, b) {
         common: {id: id, name: b.name},
         native: {name: b.name, lat: b.lat, long: b.long, radius: b.radius, device: b.device, beaconUUID: b.beaconUUID, major: b.major, minor: b.minor}
     });
-};
+}
 
 function formatTimestamp(str) {
     var timestamp = new Date(str);
@@ -206,5 +199,5 @@ function formatTimestamp(str) {
         ("0" + (timestamp.getMinutes()).toString(10)).slice(-2) + ':' +
         ("0" + (timestamp.getSeconds()).toString(10)).slice(-2);
     return ts;
-};
+}
 
