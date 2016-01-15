@@ -6,18 +6,6 @@
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
 
-
-<!-- optional: use jqGrid
-<link rel="stylesheet" type="text/css" href="../../lib/css/jqGrid/ui.jqgrid-4.5.4.css"/>
-<script type="text/javascript" src="../../lib/js/jqGrid/jquery.jqGrid-4.5.4.min.js"></script>
-<script type="text/javascript" src="../../lib/js/jqGrid/i18n/grid.locale-all.js"></script>
--->
-
-<!-- optional: use multiselect
-<link rel="stylesheet" type="text/css" href="../../lib/css/jquery.multiselect-1.13.css"/>
-<script type="text/javascript" src="../../lib/js/jquery.multiselect-1.13.min.js"></script>
--->
-
 <!-- these two file always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
 <script type="text/javascript" src="../../js/translate.js"></script>
@@ -29,40 +17,19 @@
 
     // Dictionary (systemDictionary is global variable from adapter-settings.js)
     systemDictionary = {
-        "example adapter settings": {"de": "Beispiel", "ru": "Пример"},
-        "test1":                    {"en": "Test 1", "de": "Test 1", "ru": "Тест 1"},
-        "test2":                    {"en": "Test 2", "de": "Test 2", "ru": "Тест 2"},
-        "on save adapter restarts with new config immediately": {
-            "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
-            "ru": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
-        }
+        "port":                    {"de": "Port"},
+        "user":                    {"de": "Benutzer"},
+        "password":                {"de": "Passwort"}
     };
 
-    // the function loadSettings has to exist ...
     function load(settings, onChange) {
-        // example: select elements with id=key and class=value and insert value
-        for (var key in settings) {
-            // example: select elements with id=key and class=value and insert value
-            if ($('#' + key + '.value').attr('type') == 'checkbox') {
-                $('#' + key + '.value').prop('checked', settings[key]).change(onChange);
-            } else {
-                $('#' + key + '.value').val(settings[key]).change(onChange).keyup(onChange);
-            }
-        }
-        // Signal to admin, that no changes yet
-        onChange(false);
+        $('#port').val(settings['port']);
+        $('#user').val(settings['user']);
+        $('#pass').val(settings['pass']);
     }
 
-    // ... and the function save has to exist.
-    // you have to make sure the callback is called with the settings object as first param!
     function save(callback) {
-        // example: select elements with class=value and build settings object
-        var obj = {};
-        $('.value').each(function () {
-            var $this = $(this);
-            obj[$this.attr('id')] = $this.val();
-        });
-        callback(obj);
+        callback({port: $('#port').val(), user: $('#user').val(), pass: $('#pass').val()});
     }
 </script>
 
@@ -70,16 +37,27 @@
 <div id="adapter-container">
 
     <table><tr>
-        <td><h3 class="translate">geofency adapter settings</h3></td>
+        <td><img src="geofency.png"/></td>
+        <td><h3 class="translate">Geofency Adapter Settings</h3></td>
     </tr></table>
-    <p>
-        <span class="translate">port</span> <input class="value" id="port"/><br>
-        <span class="translate">use SSL</span> <input class="checkbox" id="ssl"/><br>
-        <span class="translate">user</span> <input class="value" id="user"/><br>
-        <span class="translate">password</span> <input class="value" id="password"/><br>
+    <p style="padding-left: 12px">
+        <label for="port" class="translate">port</label> <input class="value" type="text" id="port" size="5"/><br/>
+        <label for="user" class="translate">user</label> <input class="value" type="text" id="user" size="80"/>
+        <label for="password" class="translate">password</label> <input class="value" type="text" id="pass" size="80"/>
     </p>
-
-    <p class="translate">on save the adapter restarts with the new config</p>
+    <h3>port</h3>
+    <p>geofency is listening for events on this port</p>
+    <h3>user / password</h3>
+    <p>set username and password for authentication of your geofenca device. Set the same values in your mobile app</p>
+    <h3>geofency mobile app</h3>
+    <p>
+        download geofency for your device<br/>
+        * see <a target="blank" href="http://www.geofency.com/">Geofency website</a><br/>
+        * for any new location -> properties -> webhook settings:<br/>
+        -> URL for entry & exit: &lt;your ioBroker Domain&gt; : &lt;port from above&gt; / &lt;any locationname &gt;<br/>
+        -> Post Format: JSON-encoded: enabled
+        -> authentication: set user / password from above
+    </p>
 
 </div>
 

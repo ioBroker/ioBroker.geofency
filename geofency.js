@@ -19,47 +19,14 @@
         unload: function (callback) {
             try {
                 adapter.log.info("terminating http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
-                //if (webServer.api) webServer.api.close();
                 callback();
             } catch (e) {
                 callback();
             }
         },
-        discover: function (callback) {
-
-        },
-        install: function (callback) {
-            adapter.log.info("adapter geofency installed");
-        },
-        uninstall: function (callback) {
-            adapter.log.info("adapter geofency UN-installed");
-        },
-        objectChange: function (id, obj) {
-            adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-            if (webServer && webServer.api) {
-                webServer.api.objectChange(id, obj);
-            }
-        },
-        stateChange: function (id, state) {
-            adapter.log.info('stateChange ' + id + ' ' + JSON.stringify(state));
-            if (webServer && webServer.api) {
-                webServer.api.stateChange(id, state);
-            }
-        },
         ready: function () {
             adapter.log.info("Adapter got 'Ready' Signal - initiating Main function...");
             main();
-        },
-        message: function (obj) {
-            if (typeof obj == "object" && obj.message) {
-                if (obj.command == "send") {
-                    // e.g. send email or pushover or whatever
-                    adapter.log.info("send command");
-
-                    // Send response in callback if required
-                    if (obj.callback) adapter.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-                }
-            }
         }
     });
 
@@ -152,8 +119,8 @@ function requestProcessor(req, res) {
             // create Objects if not yet available
             createObjects(id, jbody);
 
-            adapter.setState(id + '.entry', {val: jbody.entry, ack: true, expire: 86400});
-            adapter.setState(id + '.date', {val: formatTimestamp(jbody.date), ack: true, expire: 86400});
+            adapter.setState(id + '.entry', {val: jbody.entry, ack: true});
+            adapter.setState(id + '.date', {val: formatTimestamp(jbody.date), ack: true});
 
             res.writeHead(200);
             res.write("OK");

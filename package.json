@@ -6,11 +6,7 @@
   "contributors": [],
   "homepage": "",
   "license": "MIT",
-  "keywords": [
-    "ioBroker",
-    "geofency",
-    "home automation"
-  ],
+  "keywords": ["ioBroker", "geofency", "home automation"],
   "repository": {
     "type": "git",
     "url": "https://github.com/dschaedl/ioBroker.geofency"
