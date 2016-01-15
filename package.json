@@ -12,7 +12,7 @@
     "url": "https://github.com/dschaedl/ioBroker.geofency"
   },
   "dependencies": {
-    "request": "^2.65.0"
+    "request": "^2.67.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
