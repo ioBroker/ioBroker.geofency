@@ -4,7 +4,7 @@ All values of the geofency-webhook of the request are stored under the name of t
 
 ##configuration on mobile device:
 * for any location -> properties -> webhook settings:
- * URL for entry & exit: <your ioBroker Domain>:<configured port>/<any locationname>
+ * URL for entry & exit: &lt;your ioBroker Domain&gt;:&lt;configured port&gt;/&lt;any locationname&gt;
  * Post Format: JSON-encoded: enabled
  * authentication: set user / password from iobroker.geofency config
 
