@@ -11,7 +11,7 @@
         "readme":                   "https://github.com/dschaedl/ioBroker.geofency",
         "license":                  "MIT",
         "npmLibs": [],
-        "type":                     "hardware",
+        "type":                     "service",
         "keywords":                 ["iobroker", "server", "geofency", "mobile app"],
         "loglevel":                 "info",
         "enabled":                  true,
