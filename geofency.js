@@ -31,7 +31,6 @@
     });
 
 function main() {
-    adapter.config.ssl = false;
     if (adapter.config.ssl) {
         // subscribe on changes of permissions
         adapter.subscribeForeignObjects('system.group.*');
@@ -177,3 +176,4 @@ function createObjects(id, b) {
         if (!err && obj) setStates(id, b);
     });
 }
+<
