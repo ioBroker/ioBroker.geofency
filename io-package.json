@@ -1,14 +1,14 @@
 {
     "common": {
         "name":                     "geofency",
-        "version":                  "0.0.1",
+        "version":                  "0.0.2",
         "title":                    "Geofency Adapter",
         "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
         "icon":                     "geofency.png",
-        "extIcon":                  "https://raw.githubusercontent.com/dschaedl/ioBroker.geofency/master/admin/geofency.png",
-        "readme":                   "https://github.com/dschaedl/ioBroker.geofency",
+        "extIcon":                  "https://raw.githubusercontent.com/iobroker/ioBroker.geofency/master/admin/geofency.png",
+        "readme":                   "https://github.com/iobroker/ioBroker.geofency",
         "license":                  "MIT",
         "npmLibs": [],
         "type":                     "service",

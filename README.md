@@ -2,20 +2,23 @@
 This Adapter is able to receive [geofency](http://www.geofency.com/) events when entering or leaving a defined area with your mobile device.
 All values of the geofency-webhook of the request are stored under the name of the location in ioBroker.
 
-##configuration on mobile device:
+## configuration on mobile device:
 * for any location -> properties -> webhook settings:
  * URL for entry & exit: &lt;your ioBroker Domain&gt;:&lt;configured port&gt;/&lt;any locationname&gt;
  * Post Format: JSON-encoded: enabled
  * authentication: set user / password from iobroker.geofency config
 
-##in ioBroker Forum (German)
+## in ioBroker Forum (German)
 http://forum.iobroker.org/viewtopic.php?f=20&t=2076&sid=0e4d0505719b9d4f36e69e9009fafee3
 
-##security note:
+## security note:
 It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
-#changelog
+# changelog
+
+## 0.0.2
+moved to iobroker/iobroker.geofency
 
 ## 0.0.1
 initial release

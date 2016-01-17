@@ -1,6 +1,6 @@
 {
   "name": "iobroker.geofency",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "geofency adapter for ioBroker",
   "author": "Daniel Schaedler <daniel.schaedler@gmail.com>",
   "contributors": [],
@@ -9,7 +9,7 @@
   "keywords": ["ioBroker", "geofency", "home automation"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/dschaedl/ioBroker.geofency"
+    "url": "https://github.com/iobroker/ioBroker.geofency"
   },
   "dependencies": {
     "request": "^2.67.0"
@@ -26,7 +26,7 @@
     "grunt-exec": "^0.4.6"
   },
   "bugs": {
-    "url": "https://github.com/dschaedl/ioBroker.geofency/issues"
+    "url": "https://github.com/iobroker/ioBroker.geofency/issues"
   },
   "main": "geofency.js",
   "scripts": {
