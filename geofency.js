@@ -176,4 +176,3 @@ function createObjects(id, b) {
         if (!err && obj) setStates(id, b);
     });
 }
-<
