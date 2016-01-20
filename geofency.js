@@ -110,17 +110,17 @@ function requestProcessor(req, res) {
         });
 
         req.on('end', function () {
-            var id = req.url.slice(1);
+            var user = req.url.slice(1);
             var jbody = JSON.parse(body);
 
-            adapter.log.info("adapter geofency received webhook from device " + id + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
-            id = id + '.' + jbody.name;
+            adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
+            var id = user + '.' + jbody.name.replace(/\s/g, '_');
 
             // create Objects if not yet available
-            createObjects(id, jbody);
-
-            adapter.setState(id + '.entry', {val: jbody.entry, ack: true});
-            adapter.setState(id + '.date', {val: formatTimestamp(jbody.date), ack: true});
+            adapter.getObject(id, function (err, obj) {
+                if (err || !obj) return createObjects(id, jbody); 
+                setStates(id, jbody);
+            });
 
             res.writeHead(200);
             res.write("OK");
@@ -128,6 +128,18 @@ function requestProcessor(req, res) {
         });
     }
 }
+
+var lastStateNames = ["lastLeave", "lastEnter"];
+
+function setStates(id, jbody) {
+    adapter.setState(id + '.entry', { val: jbody.entry, ack: true });
+
+    var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
+    adapter.setState(id + '.date', { val: ts, ack: true });
+    adapter.setState(id + '.' + lastStateNames[false | jbody.entry], { val: ts, ack: true });
+}
+
+
 function createObjects(id, b) {
     // create all Objects
     var children = [];
@@ -148,23 +160,19 @@ function createObjects(id, b) {
     };
     adapter.setObjectNotExists(id + ".date", obj);
     children.push(obj);
+    
+    for (var i = 0; i < 2; i++) {
+        obj.common.name = lastStateNames[i];
+        adapter.setObjectNotExists(id + "." + lastStateNames[i], obj);
+        children.push(obj);
+    }
 
     adapter.setObjectNotExists(id, {
         type: 'device',
         //children: children,
         common: {id: id, name: b.name},
         native: {name: b.name, lat: b.lat, long: b.long, radius: b.radius, device: b.device, beaconUUID: b.beaconUUID, major: b.major, minor: b.minor}
+    }, function (err, obj) {
+        if (!err && obj) setStates(id, b);
     });
 }
-
-function formatTimestamp(str) {
-    var timestamp = new Date(str);
-    var ts = timestamp.getFullYear() + '-' +
-        ("0" + (timestamp.getMonth() + 1).toString(10)).slice(-2) + '-' +
-        ("0" + (timestamp.getDate()).toString(10)).slice(-2) + ' ' +
-        ("0" + (timestamp.getHours()).toString(10)).slice(-2) + ':' +
-        ("0" + (timestamp.getMinutes()).toString(10)).slice(-2) + ':' +
-        ("0" + (timestamp.getSeconds()).toString(10)).slice(-2);
-    return ts;
-}
-
