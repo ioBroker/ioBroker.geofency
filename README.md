@@ -1,3 +1,4 @@
+![Logo](admin/geofency.png)
 # ioBroker.geofency
 This Adapter is able to receive [geofency](http://www.geofency.com/) events when entering or leaving a defined area with your mobile device.
 All values of the geofency-webhook of the request are stored under the name of the location in ioBroker.
