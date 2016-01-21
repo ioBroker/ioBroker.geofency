@@ -16,18 +16,16 @@ http://forum.iobroker.org/viewtopic.php?f=20&t=2076&sid=0e4d0505719b9d4f36e69e90
 It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
-# changelog
+## Changelog
+### 0.0.3 (2016-01-21)
+* (soef) Some modifications
+* (bluefox) change type
 
-## 0.0.2
-moved to iobroker/iobroker.geofency
+### 0.0.2
+* (dschaedl) moved to iobroker/iobroker.geofency
 
-## 0.0.1
-initial release
-
-
-# Todo
-TODO
-
+### 0.0.1
+* (dschaedl) initial release
 
 # License
 
