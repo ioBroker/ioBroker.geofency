@@ -133,13 +133,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-http');
 
     grunt.registerTask('default', [
-        'exec',
         'http',
-        'clean',
         'replace',
         'updateReadme',
-        'compress',
-        'copy',
         'jshint',
         'jscs'
     ]);
