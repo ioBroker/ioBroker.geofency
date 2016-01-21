@@ -10,7 +10,7 @@ All values of the geofency-webhook of the request are stored under the name of t
  * authentication: set user / password from iobroker.geofency config
 
 ## in ioBroker Forum (German)
-http://forum.iobroker.org/viewtopic.php?f=20&t=2076&sid=0e4d0505719b9d4f36e69e9009fafee3
+http://forum.iobroker.org/viewtopic.php?f=20&t=2076
 
 ## security note:
 It is not recommended to expose this adapter to the public internet.
