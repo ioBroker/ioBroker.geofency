@@ -31,6 +31,7 @@
     });
 
 function main() {
+    chechCreateNewObjects();
     if (adapter.config.ssl) {
         // subscribe on changes of permissions
         adapter.subscribeForeignObjects('system.group.*');
@@ -120,6 +121,7 @@ function requestProcessor(req, res) {
             adapter.getObject(id, function (err, obj) {
                 if (err || !obj) return createObjects(id, jbody); 
                 setStates(id, jbody);
+                setAtHome(user, jbody);
             });
 
             res.writeHead(200);
@@ -129,7 +131,10 @@ function requestProcessor(req, res) {
     }
 }
 
-var lastStateNames = ["lastLeave", "lastEnter"];
+var lastStateNames = ["lastLeave", "lastEnter"],
+    stateAtHomeCount = "atHomeCount",
+    stateAtHome = "atHome";
+
 
 function setStates(id, jbody) {
     adapter.setState(id + '.entry', {val: jbody.entry, ack: true});
@@ -176,3 +181,47 @@ function createObjects(id, b) {
         if (!err && obj) setStates(id, b);
     });
 }
+
+
+function setAtHome(userName, body) {
+    if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) return;
+    var atHomeCount, atHome;
+    adapter.getState(stateAtHomeCount, function (err, obj) {
+        if (err || !obj) return;
+        atHomeCount = obj.val;
+        adapter.getState(stateAtHome, function (err, obj) {
+            if (err || !obj) return;
+            atHome = obj.val ? JSON.parse(obj.val) : [];
+            var idx = atHome.indexOf(userName);
+            if (body.entry === '1') {
+                if (idx < 0) {
+                    atHome.push(userName);
+                    adapter.setState(stateAtHome, JSON.stringify(atHome), true);
+                }
+            } else {
+                if (idx >= 0) {
+                    atHome.splice(idx, 1);
+                    adapter.setState(stateAtHome, JSON.stringify(atHome), true);
+                }
+            }
+            if (atHomeCount != atHome.length) adapter.setState(stateAtHomeCount, atHome.length, true);
+        });
+    });
+}
+
+
+function chechCreateNewObjects() {
+    adapter.getState(stateAtHome, function (err, obj) {
+        if (obj) return;
+        var fs = require('fs'),
+            io = fs.readFileSync(__dirname + "/io-package.json"),
+            objs = JSON.parse(io);
+        
+        for (var i = 0; i < objs.instanceObjects.length; i++) {
+            adapter.setObjectNotExists(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
+                adapter.setState(obj.id, 0, true);
+            });
+        }
+    })
+}
+

@@ -21,9 +21,41 @@
         "port": 7999,
         "ssl": false,
         "user": "geo",
-        "pass": "geo"
+        "pass": "geo",
+        "atHome": "Home"
     },
     "objects": [
 
-    ]
+    ],
+    "instanceObjects": [
+    {
+      "_id": "atHome",
+      "type": "state",
+      "common": {
+        "name": "atHome",
+        "type": "string",
+        "role": "persons",
+        "read": true,
+        "write": false,
+        "def": null,
+        "desc": "Anwesende Personen"
+      },
+      "native": { }
+    },
+    {
+      "_id": "atHomeCount",
+      "type": "state",
+      "common": {
+        "name": "atHomeCount",
+        "type": "number",
+        "role": "state",
+        "read": true,
+        "write": false,
+        "def": null,
+        "desc": "Anzahl anwesender Personen"
+      },
+      "native": { }
+    }
+  ]
+
 }
