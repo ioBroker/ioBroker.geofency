@@ -17,6 +17,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.0.4 (2016-01-24)
+* (soef) Added some new states
+
 ### 0.0.3 (2016-01-21)
 * (soef) Some modifications
 * (bluefox) change type
