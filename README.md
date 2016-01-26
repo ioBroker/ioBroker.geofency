@@ -17,6 +17,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.1.0 (2016-01-26)
+* (soef) Fix error with "at home" settings
+
 ### 0.0.4 (2016-01-24)
 * (soef) Added some new states
 
