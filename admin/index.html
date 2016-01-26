@@ -45,11 +45,16 @@
 
 
     function save(callback) {
-        // example: select elements with class=value and build settings object
         var obj = {};
         $('.value').each(function () {
             var $this = $(this);
-            obj[$this.attr('id')] = $this.val();
+            var id = $this.attr('id');
+
+            if ($this.attr('type') == 'checkbox') {
+                obj[$this.attr('id')] = $this.prop('checked');
+            } else {
+                obj[$this.attr('id')] = $this.val();
+            }
         });
         callback(obj);
     }
@@ -69,7 +74,7 @@
         <tr><td class="translate">port</td><td colspan="5"><input class="value number" id="port" type="input" size="5" /></td></tr>
         <tr><td class="translate">user</td><td colspan="2"><input class="value number" id="user" type="input" size="5" /></td></tr>
         <tr><td class="translate">password</td><td colspan="2"><input class="value number" id="pass" type="input" size="5" /></td></tr>
-        <tr><td class="translate">atHome</td><td colspan="2"><input class="value number" id="pass" type="input" size="5" /></td></tr>
+        <tr><td class="translate">atHome</td><td colspan="2"><input class="value number" id="atHome" type="input" size="5" /></td></tr>
         <tr><td class="translate">ssl</td><td colspan="2"><input type="checkbox" class="value" id="ssl" size="5" /></td></tr>
     </table>
 
