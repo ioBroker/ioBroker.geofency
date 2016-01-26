@@ -17,11 +17,11 @@
 
     // Dictionary (systemDictionary is global variable from adapter-settings.js)
     systemDictionary = {
-        "port":                    {"de": "Port"},
-        "user":                    {"de": "Benutzer", "en": "User"},
-        "password":                { "de": "Passwort", "en:": "Password" },         
-        "atHome":  { "de": "Ortsname für Zuhause", "en": "Name of home" },
-        "ssl": { "de": "SSL (https://) verwenden", "en": "User SLL (https://)"}
+        "port":                    {"de": "Port",                     "en": "Port",               "ru": "Порт"},
+        "user":                    {"de": "Benutzer",                 "en": "User",               "ru": "Пользователь"},
+        "password":                {"de": "Passwort",                 "en": "Password",           "ru": "Пароль" },         
+        "atHome":                  {"de": "Ortsname für Zuhause",     "en": "Name of home"        "ru": "Имя места для дома"},
+        "ssl":                     {"de": "SSL (https://) verwenden", "en": "Use SLL (https://)", "ru": "Использовать SSL(https://)"}
     };
 
     function load(settings, onChange) {
@@ -51,9 +51,9 @@
             var id = $this.attr('id');
 
             if ($this.attr('type') == 'checkbox') {
-                obj[$this.attr('id')] = $this.prop('checked');
+                obj[id] = $this.prop('checked');
             } else {
-                obj[$this.attr('id')] = $this.val();
+                obj[id] = $this.val();
             }
         });
         callback(obj);
@@ -79,20 +79,19 @@
     </table>
 
 
-    <h3>port</h3>
-    <p>geofency is listening for events on this port</p>
-    <h3>user / password</h3>
-    <p>set username and password for authentication of your geofenca device. Use the same values in your mobile app webhook settings</p>
-    <h3>geofency mobile app</h3>
-    <p>
+    <h3 class="translate">port</h3>
+    <p class="translate">geofency is listening for events on this port</p>
+    <h3 class="translate">user / password</h3>
+    <p class="translate">set username and password for authentication of your geofenca device. Use the same values in your mobile app webhook settings</p>
+    <h3 class="translate">geofency mobile app</h3>
+    <p class="translate">
         download geofency for your device<br />
         * see <a target="blank" href="http://www.geofency.com/">Geofency website</a><br />
         * for any new location -> properties -> webhook settings:<br />
-        -> URL for entry & exit: &lt;your ioBroker Domain&gt;:&lt;port from above&gt;/&lt;any locationname &gt;<br />
-        -> Post Format: JSON-encoded: enabled
+        -> URL for entry & exit: &lt;your ioBroker Domain&gt;:&lt;port from above&gt;/&lt;any location name &gt;<br />
+        -> Post Format: JSON-encoded: enabled<br />
         -> authentication: set user / password from above
     </p>
-
 </div>
 
 </html>
