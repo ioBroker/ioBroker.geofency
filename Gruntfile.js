@@ -78,22 +78,6 @@ module.exports = function (grunt) {
                     url: 'https://raw.githubusercontent.com/ioBroker/ioBroker.js-controller/master/tasks/jscsRules.js'
                 },
                 dest: 'tasks/jscsRules.js'
-            },
-            get_iconOnline: {
-                options: {
-                    encoding: null,
-                    url: iopackage.common.extIcon || 'https://raw.githubusercontent.com/ioBroker/ioBroker.js-controller/master/adapter/example/admin/example.png'
-                },
-                dest: dstDir + 'ioBroker.adapter.' + iopackage.common.name + '.png'
-
-            },
-            get_iconOffline: {
-                options: {
-                    encoding: null,
-                    url: iopackage.common.extIcon || 'https://raw.githubusercontent.com/ioBroker/ioBroker.js-controller/master/adapter/example/admin/example.png'
-                },
-                dest: dstDir + 'ioBroker.adapter.offline.' + iopackage.common.name + '.png'
-
             }
         }
     });
@@ -105,7 +89,7 @@ module.exports = function (grunt) {
             var readmeStart = readme.substring(0, pos + '## Changelog\n'.length);
             var readmeEnd   = readme.substring(pos + '## Changelog\n'.length);
 
-            if (iopackage.common && readme.indexOf(iopackage.common.version) == -1) {
+            if (iopackage.common && readme.indexOf(version) == -1) {
                 var timestamp = new Date();
                 var date = timestamp.getFullYear() + '-' +
                     ("0" + (timestamp.getMonth() + 1).toString(10)).slice(-2) + '-' +
@@ -122,7 +106,7 @@ module.exports = function (grunt) {
                     }
                 }
 
-                grunt.file.write('README.md', readmeStart + '### ' + iopackage.common.version + ' (' + date + ')\n' + (news ? news + '\n\n' : '\n') + readmeEnd);
+                grunt.file.write('README.md', readmeStart + '### ' + version + ' (' + date + ')\n' + (news ? news + '\n\n' : '\n') + readmeEnd);
             }
         }
     });
@@ -138,5 +122,9 @@ module.exports = function (grunt) {
         'updateReadme',
         'jshint',
         'jscs'
+    ]);
+    grunt.registerTask('p', [
+        'replace',
+        'updateReadme'
     ]);
 };
