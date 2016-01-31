@@ -9,7 +9,7 @@
   "keywords": ["ioBroker", "geofency", "home automation"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/iobroker/ioBroker.geofency"
+    "url": "https://github.com/ioBroker/ioBroker.geofency"
   },
   "dependencies": {
     "request": "^2.67.0"
@@ -19,11 +19,10 @@
     "grunt-replace": "^0.9.3",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-jscs": "^2.0.0",
-    "grunt-http": "^1.6.0",
-    "grunt-contrib-clean": "^0.6.0"
+    "grunt-http": "^1.6.0"
   },
   "bugs": {
-    "url": "https://github.com/iobroker/ioBroker.geofency/issues"
+    "url": "https://github.com/ioBroker/ioBroker.geofency/issues"
   },
   "main": "geofency.js",
   "scripts": {
