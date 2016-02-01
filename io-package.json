@@ -1,7 +1,7 @@
 {
     "common": {
         "name":                     "geofency",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "title":                    "Geofency Adapter",
         "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform":                 "Javascript/Node.js",

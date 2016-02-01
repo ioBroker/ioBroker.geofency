@@ -1,5 +1,13 @@
 ![Logo](admin/geofency.png)
 # ioBroker.geofency
+====================
+
+[![NPM version](http://img.shields.io/npm/v/iobroker.geofency.svg)](https://www.npmjs.com/package/iobroker.geofency)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.geofency.svg)](https://www.npmjs.com/package/iobroker.geofency)
+
+[![NPM](https://nodei.co/npm/iobroker.geofency.png?downloads=true)](https://nodei.co/npm/iobroker.geofency/)
+
+
 This Adapter is able to receive [geofency](http://www.geofency.com/) events when entering or leaving a defined area with your mobile device.
 All values of the geofency-webhook of the request are stored under the name of the location in ioBroker.
 
@@ -17,6 +25,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.1.1 (2016-02-01)
+* (Pmant) Fix config page
+
 ### 0.1.0 (2016-01-26)
 * (soef) Fix error with "at home" settings
 
