@@ -25,6 +25,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.1.2 (2016-02-13)
+* (soef) Dots in location name will be replaced by an underscore
+
 ### 0.1.1 (2016-02-01)
 * (Pmant) Fix config page
 
