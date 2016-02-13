@@ -9,26 +9,26 @@
 /*jslint node: true */
 "use strict";
 
-    var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
+var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 
-    var webServer =  null;
+var webServer =  null;
 
-    var adapter = utils.adapter({
-        name: 'geofency',
+var adapter = utils.adapter({
+    name: 'geofency',
 
-        unload: function (callback) {
-            try {
-                adapter.log.info("terminating http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
-                callback();
-            } catch (e) {
-                callback();
-            }
-        },
-        ready: function () {
-            adapter.log.info("Adapter got 'Ready' Signal - initiating Main function...");
-            main();
+    unload: function (callback) {
+        try {
+            adapter.log.info("terminating http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
+            callback();
+        } catch (e) {
+            callback();
         }
-    });
+    },
+    ready: function () {
+        adapter.log.info("Adapter got 'Ready' Signal - initiating Main function...");
+        main();
+    }
+});
 
 function main() {
     chechCreateNewObjects();
@@ -115,7 +115,7 @@ function requestProcessor(req, res) {
             var jbody = JSON.parse(body);
 
             adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
-            var id = user + '.' + jbody.name.replace(/\s/g, '_');
+            var id = user + '.' + jbody.name.replace(/\s|\./g, '_');
 
             // create Objects if not yet available
             adapter.getObject(id, function (err, obj) {
