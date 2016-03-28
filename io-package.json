@@ -1,7 +1,7 @@
 {
     "common": {
         "name":                     "geofency",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "title":                    "Geofency Adapter",
         "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform":                 "Javascript/Node.js",
@@ -37,7 +37,7 @@
         "role": "persons",
         "read": true,
         "write": false,
-        "def": null,
+        "def": 0,
         "desc": "Anwesende Personen"
       },
       "native": { }
@@ -51,7 +51,7 @@
         "role": "state",
         "read": true,
         "write": false,
-        "def": null,
+        "def": [],
         "desc": "Anzahl anwesender Personen"
       },
       "native": { }

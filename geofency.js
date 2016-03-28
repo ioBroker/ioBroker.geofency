@@ -31,7 +31,7 @@ var adapter = utils.adapter({
 });
 
 function main() {
-    chechCreateNewObjects();
+    checkCreateNewObjects();
     if (adapter.config.ssl) {
         // subscribe on changes of permissions
         adapter.subscribeForeignObjects('system.group.*');
@@ -204,24 +204,31 @@ function setAtHome(userName, body) {
                     adapter.setState(stateAtHome, JSON.stringify(atHome), true);
                 }
             }
-            if (atHomeCount != atHome.length) adapter.setState(stateAtHomeCount, atHome.length, true);
+            if (atHomeCount !== atHome.length) adapter.setState(stateAtHomeCount, atHome.length, true);
         });
     });
 }
 
 
-function chechCreateNewObjects() {
-    adapter.getState(stateAtHome, function (err, obj) {
-        if (obj) return;
+function checkCreateNewObjects() {
+
+    function doIt() {
         var fs = require('fs'),
             io = fs.readFileSync(__dirname + "/io-package.json"),
             objs = JSON.parse(io);
-        
+
         for (var i = 0; i < objs.instanceObjects.length; i++) {
-            adapter.setObjectNotExists(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
+            adapter.setObject(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
                 adapter.setState(obj.id, 0, true);
             });
         }
-    })
-}
+    }
 
+    var timer = setTimeout(doIt, 2000);
+    adapter.getState(stateAtHome, function (err, obj) {
+        clearTimeout(timer);
+        if (!obj) {
+            doIt();
+        }
+    });
+}
