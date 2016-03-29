@@ -25,6 +25,12 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.1.4 (2016-03-29)
+* (dschaedl) replaced geofency Icon (on request of bluefox)
+
+### 0.1.3 (2016-03-29)
+* (soef) fixed atHome and atHomeCount state creation
+
 ### 0.1.2 (2016-02-13)
 * (soef) Dots in location name will be replaced by an underscore
 
