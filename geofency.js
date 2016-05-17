@@ -37,6 +37,13 @@ function main() {
         adapter.subscribeForeignObjects('system.group.*');
         adapter.subscribeForeignObjects('system.user.*');
 
+        if (!adapter.config.certPublic) {
+            adapter.config.certPublic = 'defaultPublic';
+        }
+        if (!adapter.config.certPrivate) {
+            adapter.config.certPrivate = 'defaultPrivate';
+        }
+
         // Load certificates
         adapter.getForeignObject('system.certificates', function (err, obj) {
             if (err || !obj || !obj.native.certificates || !adapter.config.certPublic || !adapter.config.certPrivate || !obj.native.certificates[adapter.config.certPublic] || !obj.native.certificates[adapter.config.certPrivate]
