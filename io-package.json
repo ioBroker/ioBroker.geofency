@@ -34,11 +34,11 @@
       "common": {
         "name": "atHome",
         "type": "string",
-        "role": "persons",
+        "role": "state",
         "read": true,
         "write": false,
         "def": 0,
-        "desc": "Anwesende Personen"
+        "desc": "Present persions"
       },
       "native": { }
     },
@@ -52,7 +52,7 @@
         "read": true,
         "write": false,
         "def": [],
-        "desc": "Anzahl anwesender Personen"
+        "desc": "Number of present persons"
       },
       "native": { }
     }
