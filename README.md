@@ -25,6 +25,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.1.5 (2016-09-19)
+* (soef) support of certificates
+
 ### 0.1.4 (2016-03-29)
 * (dschaedl) replaced geofency Icon (on request of bluefox)
 
