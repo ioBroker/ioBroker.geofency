@@ -148,7 +148,7 @@ function setStates(id, jbody) {
 
     var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
     adapter.setState(id + '.date', {val: ts, ack: true});
-    adapter.setState(id + '.' + lastStateNames[false | jbody.entry], {val: ts, ack: true});
+    adapter.setState(id + '.' + lastStateNames[jbody.entry ? 1 : 0], {val: ts, ack: true});
 }
 
 
