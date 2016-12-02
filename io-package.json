@@ -1,7 +1,14 @@
 {
     "common": {
         "name":                     "geofency",
-        "version":                  "0.1.5",
+        "version":                  "0.1.6",
+        "news": {
+            "1.0.6": {
+                "en": "Catch parse errors",
+                "de": "Bearbeite Parsefehler",
+                "ru": "Обработка ошибок парсинга"
+            }
+        },
         "title":                    "Geofency Adapter",
         "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform":                 "Javascript/Node.js",

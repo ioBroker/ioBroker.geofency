@@ -126,7 +126,7 @@ function requestProcessor(req, res) {
 
             // create Objects if not yet available
             adapter.getObject(id, function (err, obj) {
-                if (err || !obj) return createObjects(id, jbody); 
+                if (err || !obj) return createObjects(id, jbody);
                 setStates(id, jbody);
                 setAtHome(user, jbody);
             });
@@ -148,7 +148,7 @@ function setStates(id, jbody) {
 
     var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
     adapter.setState(id + '.date', {val: ts, ack: true});
-    adapter.setState(id + '.' + lastStateNames[jbody.entry ? 1 : 0], {val: ts, ack: true});
+    adapter.setState(id + '.' + lastStateNames[(jbody.entry == "1") ? 1 : 0], {val: ts, ack: true});
 }
 
 
@@ -172,7 +172,7 @@ function createObjects(id, b) {
     };
     adapter.setObjectNotExists(id + ".date", obj);
     children.push(obj);
-    
+
     for (var i = 0; i < 2; i++) {
         obj.common.name = lastStateNames[i];
         adapter.setObjectNotExists(id + "." + lastStateNames[i], obj);
