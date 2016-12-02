@@ -7,7 +7,7 @@
                 "en": "Catch parse errors",
                 "de": "Bearbeite Parsefehler",
                 "ru": "Обработка ошибок парсинга"
-            },
+            }
         },
         "title":                    "Geofency Adapter",
         "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
