@@ -194,11 +194,11 @@ function setAtHome(userName, body) {
     if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) return;
     var atHomeCount, atHome;
     adapter.getState(stateAtHomeCount, function (err, obj) {
-        if (err || !obj) return;
-        atHomeCount = obj.val;
+        if (err) return;
+        atHomeCount = obj ? obj.val : 0;
         adapter.getState(stateAtHome, function (err, obj) {
-            if (err || !obj) return;
-            atHome = obj.val ? JSON.parse(obj.val) : [];
+            if (err) return;
+            atHome = obj ? (obj.val ? JSON.parse(obj.val) : []) : [];
             var idx = atHome.indexOf(userName);
             if (body.entry === '1') {
                 if (idx < 0) {
