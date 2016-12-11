@@ -3,7 +3,7 @@
         "name":                     "geofency",
         "version":                  "0.1.6",
         "news": {
-            "1.0.6": {
+            "0.1.6": {
                 "en": "Catch parse errors",
                 "de": "Bearbeite Parsefehler",
                 "ru": "Обработка ошибок парсинга"
@@ -45,7 +45,7 @@
         "read": true,
         "write": false,
         "def": 0,
-        "desc": "Present persions"
+        "desc": "Present persons"
       },
       "native": { }
     },
