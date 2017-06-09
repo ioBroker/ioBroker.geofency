@@ -278,6 +278,7 @@ function checkCreateNewObjects() {
 
         for (var i = 0; i < objs.instanceObjects.length; i++) {
             adapter.setObjectNotExists(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
+                adapter.log.info(JSON.stringify(obj));
                 adapter.setState(obj.id, 0, true);
             });
         }
