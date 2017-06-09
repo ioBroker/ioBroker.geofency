@@ -12,6 +12,7 @@
 var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var webServer =  null;
+var activate_server = false;
 
 var adapter = utils.adapter({
     name: 'geofency',
@@ -27,39 +28,46 @@ var adapter = utils.adapter({
     ready: function () {
         adapter.log.info("Adapter got 'Ready' Signal - initiating Main function...");
         main();
+    },
+    message: function (msg) {
+        processMessage(msg);
     }
 });
 
 function main() {
     checkCreateNewObjects();
-    if (adapter.config.ssl) {
-        // subscribe on changes of permissions
-        adapter.subscribeForeignObjects('system.group.*');
-        adapter.subscribeForeignObjects('system.user.*');
+    if (adapter.config.activate_server !== undefined) activate_server = adapter.config.activate_server;
+        else activate_server = true;
+    if (activate_server) {
+        if (adapter.config.ssl) {
+            // subscribe on changes of permissions
+            adapter.subscribeForeignObjects('system.group.*');
+            adapter.subscribeForeignObjects('system.user.*');
 
-        if (!adapter.config.certPublic) {
-            adapter.config.certPublic = 'defaultPublic';
-        }
-        if (!adapter.config.certPrivate) {
-            adapter.config.certPrivate = 'defaultPrivate';
-        }
-
-        // Load certificates
-        adapter.getForeignObject('system.certificates', function (err, obj) {
-            if (err || !obj || !obj.native.certificates || !adapter.config.certPublic || !adapter.config.certPrivate || !obj.native.certificates[adapter.config.certPublic] || !obj.native.certificates[adapter.config.certPrivate]
-            ) {
-                adapter.log.error('Cannot enable secure web server, because no certificates found: ' + adapter.config.certPublic + ', ' + adapter.config.certPrivate);
-            } else {
-                adapter.config.certificates = {
-                    key: obj.native.certificates[adapter.config.certPrivate],
-                    cert: obj.native.certificates[adapter.config.certPublic]
-                };
-
+            if (!adapter.config.certPublic) {
+                adapter.config.certPublic = 'defaultPublic';
             }
+            if (!adapter.config.certPrivate) {
+                adapter.config.certPrivate = 'defaultPrivate';
+            }
+
+            // Load certificates
+            adapter.getForeignObject('system.certificates', function (err, obj) {
+                if (err || !obj || !obj.native.certificates || !adapter.config.certPublic || !adapter.config.certPrivate || !obj.native.certificates[adapter.config.certPublic] || !obj.native.certificates[adapter.config.certPrivate]
+                ) {
+                    adapter.log.error('Cannot enable secure web server, because no certificates found: ' + adapter.config.certPublic + ', ' + adapter.config.certPrivate);
+                } else {
+                    adapter.config.certificates = {
+                        key: obj.native.certificates[adapter.config.certPrivate],
+                        cert: obj.native.certificates[adapter.config.certPublic]
+                    };
+
+                }
+                webServer = initWebServer(adapter.config);
+            });
+        } else {
             webServer = initWebServer(adapter.config);
-        });
-    } else {
-        webServer = initWebServer(adapter.config);
+        }
     }
 }
 
@@ -108,6 +116,41 @@ function initWebServer(settings) {
 }
 
 function requestProcessor(req, res) {
+    var check_user = adapter.config.user;
+    var check_pass = adapter.config.pass;
+    if (check_user.length || check_pass.length) {
+        // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
+        var auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
+        adapter.log.debug("Authorization Header is: ", auth);
+
+        var username = '';
+        var password = '';
+        var request_valid = true;
+        if (auth) {
+            var tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
+            var buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
+            var plain_auth = buf.toString();        // read it back out as a string
+
+            adapter.log.debug("Decoded Authorization ", plain_auth);
+            // At this point plain_auth = "username:password"
+            var creds = plain_auth.split(':');      // split on a ':'
+            username = creds[0];
+            password = creds[1];
+            if ((username != check_user) || (password == check_pass)) {
+                adapter.log.warn("User credentials invalid");
+                request_valid = false;
+            }
+        }
+        else {
+            adapter.log.warn("Authorization Header missing but user/pass defined");
+            request_valid = false;
+        }
+        if (! request_valid) {
+            res.statusCode = 403;
+            res.end();
+            return;
+        }
+    }
     if (req.method === 'POST') {
         var body = '';
 
@@ -121,21 +164,30 @@ function requestProcessor(req, res) {
             var user = req.url.slice(1);
             var jbody = JSON.parse(body);
 
-            adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
-            var id = user + '.' + jbody.name.replace(/\s|\./g, '_');
-
-            // create Objects if not yet available
-            adapter.getObject(id, function (err, obj) {
-                if (err || !obj) return createObjects(id, jbody);
-                setStates(id, jbody);
-                setAtHome(user, jbody);
-            });
+            handleWebhookRequest(user, jbody);
 
             res.writeHead(200);
             res.write("OK");
             res.end();
         });
     }
+    else {
+        res.writeHead(500);
+        res.write("Request error");
+        res.end();
+    }
+}
+
+function handleWebhookRequest(user, jbody) {
+    adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
+    var id = user + '.' + jbody.name.replace(/\s|\./g, '_');
+
+    // create Objects if not yet available
+    adapter.getObject(id, function (err, obj) {
+        if (err || !obj) return createObjects(id, jbody);
+        setStates(id, jbody);
+        setAtHome(user, jbody);
+    });
 }
 
 var lastStateNames = ["lastLeave", "lastEnter"],
@@ -225,7 +277,7 @@ function checkCreateNewObjects() {
             objs = JSON.parse(io);
 
         for (var i = 0; i < objs.instanceObjects.length; i++) {
-            adapter.setObject(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
+            adapter.setObjectNotExists(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
                 adapter.setState(obj.id, 0, true);
             });
         }
@@ -238,4 +290,12 @@ function checkCreateNewObjects() {
             doIt();
         }
     });
+}
+
+function processMessage(message) {
+    if (!message || !message.message.user || !message.message.data) return;
+
+    adapter.log.info('Message received = ' + JSON.stringify(message));
+
+    handleWebhookRequest(message.message.user, message.message.data);
 }

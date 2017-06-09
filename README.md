@@ -25,6 +25,11 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.2.0 (2017-06-09)
+* (Apollon77) Add missing authentication check
+* (Apollon77) Add option to send in data as Message when received over other ways
+* (Apollon77) Add option not to start a webserver for cases where data are received using messages
+
 ### 0.1.5 (2016-09-19)
 * (soef) support of certificates
 

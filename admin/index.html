@@ -18,14 +18,16 @@
     // Dictionary (systemDictionary is global variable from adapter-settings.js)
     systemDictionary = {
         "port":                    {"de": "Port",                     "en": "Port",               "ru": "Порт"},
+        "activate_server":         {"de": "Server aktivieren",        "en": "Activate Server",    "ru": "Activate Server"},
         "user":                    {"de": "Benutzer",                 "en": "User",               "ru": "Пользователь"},
-        "password":                {"de": "Passwort",                 "en": "Password",           "ru": "Пароль" },         
+        "password":                {"de": "Passwort",                 "en": "Password",           "ru": "Пароль" },
         "atHome":                  {"de": "Ortsname für Zuhause",     "en": "Name of home",        "ru": "Имя места для дома"},
         "ssl":                     {"de": "SSL (https://) verwenden", "en": "Use SLL (https://)", "ru": "Использовать SSL(https://)"}
     };
 
     function load(settings, onChange) {
         // example: select elements with id=key and class=value and insert value
+        if (settings.activate_server === undefined) settings.activate_server = true;
         for (var key in settings) {
             // example: select elements with id=key and class=value and insert value
             if ($('#' + key + '.value').attr('type') == 'checkbox') {
@@ -74,6 +76,7 @@
         <tr><td class="translate">port</td><td colspan="5"><input class="value number" id="port" type="input" size="5" /></td></tr>
         <tr><td class="translate">user</td><td colspan="2"><input class="value number" id="user" type="input" size="5" /></td></tr>
         <tr><td class="translate">password</td><td colspan="2"><input class="value number" id="pass" type="input" size="5" /></td></tr>
+        <tr><td class="translate">activate_server</td><td colspan="2"><input type="checkbox" class="value" id="activate_server" size="5" /></td></tr>
         <tr><td class="translate">atHome</td><td colspan="2"><input class="value number" id="atHome" type="input" size="5" /></td></tr>
         <tr><td class="translate">ssl</td><td colspan="2"><input type="checkbox" class="value" id="ssl" size="5" /></td></tr>
     </table>

@@ -1,8 +1,13 @@
 {
     "common": {
         "name":                     "geofency",
-        "version":                  "0.1.6",
+        "version":                  "0.2.0",
         "news": {
+            "0.2.0": {
+                "en": "Add Message handling to process webhook data received from other sources then own webserver",
+                "de": "Behandling von Messages hinzugefügt um Webhook-Daten aus anderen Quellen als dem eigenen Webserver zu verarbeiten",
+                "ru": "Add Message handling to process webhook data received from other sources then own webserver"
+            },
             "0.1.6": {
                 "en": "Catch parse errors",
                 "de": "Bearbeite Parsefehler",
@@ -22,9 +27,12 @@
         "keywords":                 ["iobroker", "server", "geofency", "mobile app"],
         "loglevel":                 "info",
         "enabled":                  true,
-        "localLink":                "http://%ip%:%port%"
+        "localLink":                "http://%ip%:%port%",
+        "messagebox":               true,
+        "subscribe":                "messagebox"
     },
     "native": {
+        "activate_server": true,
         "port": 7999,
         "ssl": false,
         "user": "geo",
