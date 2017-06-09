@@ -269,6 +269,13 @@ function setAtHome(userName, body) {
 }
 
 
+function createAndSetObject(id, obj) {
+    adapter.setObjectNotExists(id, obj, function (err) {
+        adapter.setState(id, 0, true);
+    });
+
+}
+
 function checkCreateNewObjects() {
 
     function doIt() {
@@ -277,10 +284,7 @@ function checkCreateNewObjects() {
             objs = JSON.parse(io);
 
         for (var i = 0; i < objs.instanceObjects.length; i++) {
-            adapter.setObjectNotExists(objs.instanceObjects[i]._id, objs.instanceObjects[i], function (err, obj) {
-                adapter.log.info(JSON.stringify(obj));
-                adapter.setState(obj.id, 0, true);
-            });
+            createAndSetObject(objs.instanceObjects[i]._id, objs.instanceObjects[i]);
         }
     }
 
