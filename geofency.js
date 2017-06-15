@@ -118,7 +118,7 @@ function initWebServer(settings) {
 function requestProcessor(req, res) {
     var check_user = adapter.config.user;
     var check_pass = adapter.config.pass;
-    if (check_user.length || check_pass.length) {
+    if (check_user.length > 0 || check_pass.length > 0) {
         // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
         var auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
         adapter.log.debug("Authorization Header is: ", auth);
