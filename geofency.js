@@ -145,7 +145,7 @@ function requestProcessor(req, res) {
             adapter.log.warn("Authorization Header missing but user/pass defined");
             request_valid = false;
         }
-        if (! request_valid) {
+        if (!request_valid) {
             res.statusCode = 403;
             res.end();
             return;
