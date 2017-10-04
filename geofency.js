@@ -196,7 +196,7 @@ var lastStateNames = ["lastLeave", "lastEnter"],
 
 
 function setStates(id, jbody) {
-    adapter.setState(id + '.entry', {val: jbody.entry, ack: true});
+    adapter.setState(id + '.entry', {val: ((jbody.entry == "1") ? true : false), ack: true});
 
     var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
     adapter.setState(id + '.date', {val: ts, ack: true});
