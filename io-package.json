@@ -28,7 +28,7 @@
         "readme": "https://github.com/ioBroker/ioBroker.geofency",
         "license": "MIT",
         "npmLibs": [],
-        "type": "service",
+        "type": "geoposition",
         "keywords": [
             "iobroker",
             "server",
