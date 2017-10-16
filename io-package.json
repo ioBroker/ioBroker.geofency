@@ -41,7 +41,8 @@
         "messagebox": true,
         "subscribe": "messagebox",
         "authors": [
-            "Daniel Schaedler <daniel.schaedler@gmail.com>"
+            "Daniel Schaedler <daniel.schaedler@gmail.com>",
+            "Apollon77 <ingo@fischer-ka.de>"
         ]
     },
     "native": {

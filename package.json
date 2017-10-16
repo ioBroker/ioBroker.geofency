@@ -3,7 +3,9 @@
   "version": "0.3.0",
   "description": "geofency adapter for ioBroker",
   "author": "Daniel Schaedler <daniel.schaedler@gmail.com>",
-  "contributors": [],
+  "contributors": [
+      "Apollon77 <ingo@fischer-ka.de>"
+  ],
   "homepage": "",
   "license": "MIT",
   "keywords": [
