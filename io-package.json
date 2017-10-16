@@ -1,7 +1,7 @@
 {
     "common": {
-        "name":                     "geofency",
-        "version":                  "0.3.0",
+        "name": "geofency",
+        "version": "0.3.0",
         "news": {
             "0.3.0": {
                 "en": "Make sure 'entry' is really a boolean as defined in object",
@@ -19,22 +19,30 @@
                 "ru": "Обработка ошибок парсинга"
             }
         },
-        "title":                    "Geofency Adapter",
-        "desc":                     "listening for geofency events. Based on the location based mobile App (Geofency)",
-        "platform":                 "Javascript/Node.js",
-        "mode":                     "daemon",
-        "icon":                     "geofency.png",
-        "extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
-        "readme":                   "https://github.com/ioBroker/ioBroker.geofency",
-        "license":                  "MIT",
+        "title": "Geofency Adapter",
+        "desc": "listening for geofency events. Based on the location based mobile App (Geofency)",
+        "platform": "Javascript/Node.js",
+        "mode": "daemon",
+        "icon": "geofency.png",
+        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
+        "readme": "https://github.com/ioBroker/ioBroker.geofency",
+        "license": "MIT",
         "npmLibs": [],
-        "type":                     "service",
-        "keywords":                 ["iobroker", "server", "geofency", "mobile app"],
-        "loglevel":                 "info",
-        "enabled":                  true,
-        "localLink":                "http://%ip%:%port%",
-        "messagebox":               true,
-        "subscribe":                "messagebox"
+        "type": "service",
+        "keywords": [
+            "iobroker",
+            "server",
+            "geofency",
+            "mobile app"
+        ],
+        "loglevel": "info",
+        "enabled": true,
+        "localLink": "http://%ip%:%port%",
+        "messagebox": true,
+        "subscribe": "messagebox",
+        "authors": [
+            "Daniel Schaedler <daniel.schaedler@gmail.com>"
+        ]
     },
     "native": {
         "activate_server": true,
@@ -44,38 +52,35 @@
         "pass": "geo",
         "atHome": "Home"
     },
-    "objects": [
-
-    ],
+    "objects": [],
     "instanceObjects": [
-    {
-      "_id": "atHome",
-      "type": "state",
-      "common": {
-        "name": "atHome",
-        "type": "string",
-        "role": "state",
-        "read": true,
-        "write": false,
-        "def": 0,
-        "desc": "Present persons"
-      },
-      "native": { }
-    },
-    {
-      "_id": "atHomeCount",
-      "type": "state",
-      "common": {
-        "name": "atHomeCount",
-        "type": "number",
-        "role": "state",
-        "read": true,
-        "write": false,
-        "def": [],
-        "desc": "Number of present persons"
-      },
-      "native": { }
-    }
-  ]
-
+        {
+            "_id": "atHome",
+            "type": "state",
+            "common": {
+                "name": "atHome",
+                "type": "string",
+                "role": "state",
+                "read": true,
+                "write": false,
+                "def": 0,
+                "desc": "Present persons"
+            },
+            "native": {}
+        },
+        {
+            "_id": "atHomeCount",
+            "type": "state",
+            "common": {
+                "name": "atHomeCount",
+                "type": "number",
+                "role": "state",
+                "read": true,
+                "write": false,
+                "def": [],
+                "desc": "Number of present persons"
+            },
+            "native": {}
+        }
+    ]
 }
