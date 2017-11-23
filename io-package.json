@@ -24,7 +24,7 @@
             "en": "listening for geofency events. Based on the location based mobile App (Geofency)",
             "de": "reagiert auf geofency Ereignisse. Basiert auf der mobilen Geolocation App (Geofency)",
             "ru": "listening for geofency events. Based on the location based mobile App (Geofency)"
-        },desc": "listening for geofency events. Based on the location based mobile App (Geofency)",
+        },
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "geofency.png",
