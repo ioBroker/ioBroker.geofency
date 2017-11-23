@@ -5,22 +5,26 @@
         "news": {
             "0.3.0": {
                 "en": "Make sure 'entry' is really a boolean as defined in object",
-                "de": "SIcherstellen das 'entry' wirklich ein Boolean ist wie im Objekt definiert.",
+                "de": "Sicherstellen dass 'entry' wirklich ein Boolean ist, wie im Objekt definiert.",
                 "ru": "Make sure 'entry' is really a boolean as defined in object"
             },
             "0.2.0": {
                 "en": "Add Message handling to process webhook data received from other sources then own webserver",
-                "de": "Behandling von Messages hinzugefügt um Webhook-Daten aus anderen Quellen als dem eigenen Webserver zu verarbeiten",
+                "de": "Behandlung von Messages hinzugefügt um Webhook-Daten aus anderen Quellen als dem eigenen Webserver zu verarbeiten",
                 "ru": "Add Message handling to process webhook data received from other sources then own webserver"
             },
             "0.1.6": {
                 "en": "Catch parse errors",
-                "de": "Bearbeite Parsefehler",
+                "de": "Parserfehler bearbeitet",
                 "ru": "Обработка ошибок парсинга"
             }
         },
         "title": "Geofency Adapter",
-        "desc": "listening for geofency events. Based on the location based mobile App (Geofency)",
+        "desc":                     {
+            "en": "listening for geofency events. Based on the location based mobile App (Geofency)",
+            "de": "reagiert auf geofency Ereignisse. Basiert auf der mobilen Geolocation App (Geofency)",
+            "ru": "listening for geofency events. Based on the location based mobile App (Geofency)"
+        },desc": "listening for geofency events. Based on the location based mobile App (Geofency)",
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "geofency.png",
