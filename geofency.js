@@ -118,38 +118,37 @@ function initWebServer(settings) {
 function requestProcessor(req, res) {
     var check_user = adapter.config.user;
     var check_pass = adapter.config.pass;
-    if (check_user.length > 0 || check_pass.length > 0) {
-        // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
-        var auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
-        adapter.log.debug("Authorization Header is: ", auth);
 
-        var username = '';
-        var password = '';
-        var request_valid = true;
-        if (auth) {
-            var tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
-            var buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
-            var plain_auth = buf.toString();        // read it back out as a string
+    // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
+    var auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
+    adapter.log.debug("Authorization Header is: ", auth);
 
-            adapter.log.debug("Decoded Authorization ", plain_auth);
-            // At this point plain_auth = "username:password"
-            var creds = plain_auth.split(':');      // split on a ':'
-            username = creds[0];
-            password = creds[1];
-            if ((username != check_user) || (password == check_pass)) {
-                adapter.log.warn("User credentials invalid");
-                request_valid = false;
-            }
-        }
-        else {
-            adapter.log.warn("Authorization Header missing but user/pass defined");
+    var username = '';
+    var password = '';
+    var request_valid = true;
+    if (auth && check_user.length > 0 && check_pass.length > 0) {
+        var tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
+        var buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
+        var plain_auth = buf.toString();        // read it back out as a string
+
+        adapter.log.debug("Decoded Authorization ", plain_auth);
+        // At this point plain_auth = "username:password"
+        var creds = plain_auth.split(':');      // split on a ':'
+        username = creds[0];
+        password = creds[1];
+        if ((username != check_user) || (password == check_pass)) {
+            adapter.log.warn("User credentials invalid");
             request_valid = false;
         }
-        if (!request_valid) {
-            res.statusCode = 403;
-            res.end();
-            return;
-        }
+    }
+    /*else {
+        adapter.log.warn("Authorization Header missing but user/pass defined");
+        request_valid = false;
+    }*/
+    if (!request_valid) {
+        res.statusCode = 403;
+        res.end();
+        return;
     }
     if (req.method === 'POST') {
         var body = '';

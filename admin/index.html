@@ -11,20 +11,10 @@
 <script type="text/javascript" src="../../js/translate.js"></script>
 <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 
+<script type="text/javascript" src="words.js"></script>
 
 <!-- you have to define 2 functions in the global scope: -->
 <script type="text/javascript">
-
-    // Dictionary (systemDictionary is global variable from adapter-settings.js)
-    systemDictionary = {
-        "port":                    {"de": "Port",                     "en": "Port",               "ru": "Порт"},
-        "activate_server":         {"de": "Server aktivieren",        "en": "Activate Server",    "ru": "Activate Server"},
-        "user":                    {"de": "Benutzer",                 "en": "User",               "ru": "Пользователь"},
-        "password":                {"de": "Passwort",                 "en": "Password",           "ru": "Пароль" },
-        "atHome":                  {"de": "Ortsname für Zuhause",     "en": "Name of home",        "ru": "Имя места для дома"},
-        "ssl":                     {"de": "SSL (https://) verwenden", "en": "Use SLL (https://)", "ru": "Использовать SSL(https://)"}
-    };
-
     function load(settings, onChange) {
         // example: select elements with id=key and class=value and insert value
         if (settings.activate_server === undefined) settings.activate_server = true;
