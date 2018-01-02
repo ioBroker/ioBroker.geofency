@@ -14,7 +14,7 @@ var utils = require(__dirname + '/lib/utils'); // Get common adapter utils
 var webServer =  null;
 var activate_server = false;
 
-var adapter = utils.adapter({
+var adapter = utils.Adapter({
     name: 'geofency',
 
     unload: function (callback) {
