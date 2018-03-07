@@ -1,11 +1,16 @@
 {
     "common": {
         "name": "geofency",
-        "version": "0.3.1",
+        "version": "0.3.2",
         "news": {
+            "0.3.2": {
+                "en": "Fix Authentication",
+                "de": "Fehler bei Zugangsprüfung behoben",
+                "ru": "Fix Authentication"
+            },
             "0.3.0": {
                 "en": "Make sure 'entry' is really a boolean as defined in object",
-                "de": "SIcherstellen das 'entry' wirklich ein Boolean ist wie im Objekt definiert.",
+                "de": "Sicherstellen das 'entry' wirklich ein Boolean ist wie im Objekt definiert.",
                 "ru": "Make sure 'entry' is really a boolean as defined in object"
             },
             "0.2.0": {
