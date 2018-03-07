@@ -136,7 +136,7 @@ function requestProcessor(req, res) {
         var creds = plain_auth.split(':');      // split on a ':'
         username = creds[0];
         password = creds[1];
-        if ((username != check_user) || (password == check_pass)) {
+        if ((username != check_user) || (password != check_pass)) {
             adapter.log.warn("User credentials invalid");
             request_valid = false;
         }
