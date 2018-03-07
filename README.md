@@ -25,6 +25,9 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+### 0.3.2 (2018-03-07)
+* (Apollon77) Fix Authentication
+
 ### 0.3.0 (2017-10-04)
 * (Apollon77) BREAKING!!! Make sure 'entry' is really a boolean as defined in object
 
