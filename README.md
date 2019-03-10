@@ -2,7 +2,7 @@
 # ioBroker.geofency
 ====================
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.geofency.svg)](https://www.npmjs.com/package/iobroker.geofency)
+![Number of Installations](http://iobroker.live/badges/geofency-installed.svg) ![Number of Installations](http://iobroker.live/badges/geofency-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.geofency.svg)](https://www.npmjs.com/package/iobroker.geofency)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.geofency.svg)](https://www.npmjs.com/package/iobroker.geofency)
 
 [![NPM](https://nodei.co/npm/iobroker.geofency.png?downloads=true)](https://nodei.co/npm/iobroker.geofency/)
