@@ -30,7 +30,7 @@
         "mode": "daemon",
         "icon": "geofency.png",
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
-        "readme": "https://github.com/ioBroker/ioBroker.geofency",
+        "readme": "https://github.com/ioBroker/ioBroker.geofency/blob/master/README.md",
         "license": "MIT",
         "npmLibs": [],
         "type": "geoposition",
