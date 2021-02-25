@@ -200,6 +200,10 @@ function setStates(id, jbody) {
     var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
     adapter.setState(id + '.date', {val: ts, ack: true});
     adapter.setState(id + '.' + lastStateNames[(jbody.entry == "1") ? 1 : 0], {val: ts, ack: true});
+    adapter.setState(id + '.motion', {val: jbody.motion, ack: true});
+    adapter.setState(id + '.name', {val: jbody.name, ack: true});
+    adapter.setState(id + '.currentLatitude', {val: jbody.currentLatitude, ack: true});
+    adapter.setState(id + '.currentLongitude', {val: jbody.currentLongitude, ack: true});
 }
 
 
@@ -223,12 +227,58 @@ function createObjects(id, b) {
     };
     adapter.setObjectNotExists(id + ".date", obj);
     children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'motion', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".motion", obj);
+    children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'name', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".name", obj);
+    children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'currentLatitude', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".currentLatitude", obj);
+    children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'currentLongitude', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".currentLongitude", obj);
+    children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'lastLeave', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".lastLeave", obj);
+    children.push(obj);
+    obj = {
+        type: 'state',
+        common: {name: 'lastEnter', read: true, write: true, type: 'string'},
+        native: {id: id}
+    };
+    adapter.setObjectNotExists(id + ".lastEnter", obj);
+    children.push(obj);
+
+/*  
+    // Trouble with state names
 
     for (var i = 0; i < 2; i++) {
         obj.common.name = lastStateNames[i];
         adapter.setObjectNotExists(id + "." + lastStateNames[i], obj);
         children.push(obj);
     }
+*/
 
     adapter.setObjectNotExists(id, {
         type: 'device',
@@ -303,3 +353,4 @@ function processMessage(message) {
 
     handleWebhookRequest(message.message.user, message.message.data);
 }
+
