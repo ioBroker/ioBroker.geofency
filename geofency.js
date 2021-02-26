@@ -214,7 +214,7 @@ function createObjects(id, b) {
     var obj = {
         type: 'state',
         //parent: id,
-        common: {name: 'entry', read: true, write: true, type: 'boolean'},
+        common: {name: 'entry', read: true, write: false, type: 'boolean'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".entry", obj);
@@ -222,55 +222,55 @@ function createObjects(id, b) {
     obj = {
         type: 'state',
         //parent: id,
-        common: {name: 'date', read: true, write: true, type: 'string'},
+        common: {name: 'date', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".date", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'motion', read: true, write: true, type: 'string'},
+        common: {name: 'motion', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".motion", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'name', read: true, write: true, type: 'string'},
+        common: {name: 'name', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".name", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'currentLatitude', read: true, write: true, type: 'string'},
+        common: {name: 'currentLatitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".currentLatitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'currentLongitude', read: true, write: true, type: 'string'},
+        common: {name: 'currentLongitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".currentLongitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'lastLeave', read: true, write: true, type: 'string'},
+        common: {name: 'lastLeave', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".lastLeave", obj);
     children.push(obj);
     obj = {
         type: 'state',
-        common: {name: 'lastEnter', read: true, write: true, type: 'string'},
+        common: {name: 'lastEnter', read: true, write: false, type: 'string'},
         native: {id: id}
     };
     adapter.setObjectNotExists(id + ".lastEnter", obj);
     children.push(obj);
 
-/*  
+/*
     // Trouble with state names
 
     for (var i = 0; i < 2; i++) {

@@ -32,7 +32,6 @@
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
         "readme": "https://github.com/ioBroker/ioBroker.geofency/blob/master/README.md",
         "license": "MIT",
-        "npmLibs": [],
         "type": "geoposition",
         "keywords": [
             "iobroker",
@@ -48,6 +47,11 @@
         "authors": [
             "Daniel Schaedler <daniel.schaedler@gmail.com>",
             "Apollon77 <ingo@fischer-ka.de>"
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
         ]
     },
     "native": {
