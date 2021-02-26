@@ -29,6 +29,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 ### __WORK IN PROGRESS__
 * (Apollon77) js-controller 2.0 is now needed at least
 * (allesgutewarweg) Add more JSON decoded states
+* (Apollon77) Update dependencies
 
 ### 0.3.2 (2018-03-07)
 * (Apollon77) Fix Authentication
