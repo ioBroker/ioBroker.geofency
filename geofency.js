@@ -9,12 +9,12 @@
 /*jslint node: true */
 "use strict";
 
-var utils = require('@iobroker/adapter-core'); // Get common adapter utils
+const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 
-var webServer =  null;
-var activate_server = false;
+let webServer =  null;
+let activate_server = false;
 
-var adapter = utils.Adapter({
+let adapter = utils.Adapter({
     name: 'geofency',
 
     unload: function (callback) {
@@ -73,7 +73,7 @@ function main() {
 
 function initWebServer(settings) {
 
-    var server = {
+    const server = {
         server:    null,
         settings:  settings
     };
@@ -99,7 +99,7 @@ function initWebServer(settings) {
 
     if (server.server) {
         adapter.getPort(settings.port, function (port) {
-            if (port != settings.port && !adapter.config.findNextPort) {
+            if (port !== settings.port && !adapter.config.findNextPort) {
                 adapter.log.error('port ' + settings.port + ' already in use');
                 process.exit(1);
             }
@@ -116,27 +116,27 @@ function initWebServer(settings) {
 }
 
 function requestProcessor(req, res) {
-    var check_user = adapter.config.user;
-    var check_pass = adapter.config.pass;
+    const check_user = adapter.config.user;
+    const check_pass = adapter.config.pass;
 
     // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
-    var auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
+    const auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
     adapter.log.debug("Authorization Header is: ", auth);
 
-    var username = '';
-    var password = '';
-    var request_valid = true;
+    let username = '';
+    let password = '';
+    let request_valid = true;
     if (auth && check_user.length > 0 && check_pass.length > 0) {
-        var tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
-        var buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
-        var plain_auth = buf.toString();        // read it back out as a string
+        const tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
+        const buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
+        const plain_auth = buf.toString();        // read it back out as a string
 
         adapter.log.debug("Decoded Authorization ", plain_auth);
         // At this point plain_auth = "username:password"
-        var creds = plain_auth.split(':');      // split on a ':'
+        const creds = plain_auth.split(':');      // split on a ':'
         username = creds[0];
         password = creds[1];
-        if ((username != check_user) || (password != check_pass)) {
+        if ((username !== check_user) || (password !== check_pass)) {
             adapter.log.warn("User credentials invalid");
             request_valid = false;
         }
@@ -151,7 +151,7 @@ function requestProcessor(req, res) {
         return;
     }
     if (req.method === 'POST') {
-        var body = '';
+        let body = '';
 
         adapter.log.debug("request path:" + req.path);
 
@@ -160,8 +160,8 @@ function requestProcessor(req, res) {
         });
 
         req.on('end', function () {
-            var user = req.url.slice(1);
-            var jbody = JSON.parse(body);
+            const user = req.url.slice(1);
+            const jbody = JSON.parse(body);
 
             handleWebhookRequest(user, jbody);
 
@@ -177,27 +177,28 @@ function requestProcessor(req, res) {
     }
 }
 
-function handleWebhookRequest(user, jbody) {
-    adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
-    var id = user + '.' + jbody.name.replace(/\s|\./g, '_');
+const objectsInitialized = {};
 
-    // create Objects if not yet available
-    adapter.getObject(id, function (err, obj) {
-        if (err || !obj) return createObjects(id, jbody);
-        setStates(id, jbody);
-        setAtHome(user, jbody);
-    });
+async function handleWebhookRequest(user, jbody) {
+    adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
+    const id = user + '.' + jbody.name.replace(/\s|\./g, '_');
+
+    if (!objectsInitialized[id]) {
+        await createObjects(id, jbody);
+        objectsInitialized[id] = true;
+    }
+    setStates(id, jbody);
+    setAtHome(user, jbody);
 }
 
-var lastStateNames = ["lastLeave", "lastEnter"],
-    stateAtHomeCount = "atHomeCount",
-    stateAtHome = "atHome";
-
+const lastStateNames = ["lastLeave", "lastEnter"],
+      stateAtHomeCount = "atHomeCount",
+      stateAtHome = "atHome";
 
 function setStates(id, jbody) {
     adapter.setState(id + '.entry', {val: ((jbody.entry == "1") ? true : false), ack: true});
 
-    var ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
+    const ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
     adapter.setState(id + '.date', {val: ts, ack: true});
     adapter.setState(id + '.' + lastStateNames[(jbody.entry == "1") ? 1 : 0], {val: ts, ack: true});
     adapter.setState(id + '.motion', {val: jbody.motion, ack: true});
@@ -207,17 +208,17 @@ function setStates(id, jbody) {
 }
 
 
-function createObjects(id, b) {
+async function createObjects(id, b) {
     // create all Objects
-    var children = [];
+    const children = [];
 
-    var obj = {
+    let obj = {
         type: 'state',
         //parent: id,
         common: {name: 'entry', read: true, write: false, type: 'boolean'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".entry", obj);
+    await adapter.setObjectNotExists(id + ".entry", obj);
     children.push(obj);
     obj = {
         type: 'state',
@@ -225,49 +226,49 @@ function createObjects(id, b) {
         common: {name: 'date', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".date", obj);
+    await adapter.setObjectNotExists(id + ".date", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'motion', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".motion", obj);
+    await adapter.setObjectNotExists(id + ".motion", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'name', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".name", obj);
+    await adapter.setObjectNotExists(id + ".name", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'currentLatitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".currentLatitude", obj);
+    await adapter.setObjectNotExists(id + ".currentLatitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'currentLongitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".currentLongitude", obj);
+    await adapter.setObjectNotExists(id + ".currentLongitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'lastLeave', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".lastLeave", obj);
+    await adapter.setObjectNotExists(id + ".lastLeave", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'lastEnter', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    adapter.setObjectNotExists(id + ".lastEnter", obj);
+    await adapter.setObjectNotExists(id + ".lastEnter", obj);
     children.push(obj);
 
 /*
@@ -280,27 +281,25 @@ function createObjects(id, b) {
     }
 */
 
-    adapter.setObjectNotExists(id, {
+    await adapter.setObjectNotExists(id, {
         type: 'device',
         //children: children,
         common: {id: id, name: b.name},
         native: {name: b.name, lat: b.lat, long: b.long, radius: b.radius, device: b.device, beaconUUID: b.beaconUUID, major: b.major, minor: b.minor}
-    }, function (err, obj) {
-        if (!err && obj) setStates(id, b);
     });
 }
 
 
 function setAtHome(userName, body) {
     if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) return;
-    var atHomeCount, atHome;
+    let atHomeCount, atHome;
     adapter.getState(stateAtHomeCount, function (err, obj) {
         if (err) return;
         atHomeCount = obj ? obj.val : 0;
         adapter.getState(stateAtHome, function (err, obj) {
             if (err) return;
             atHome = obj ? (obj.val ? JSON.parse(obj.val) : []) : [];
-            var idx = atHome.indexOf(userName);
+            const idx = atHome.indexOf(userName);
             if (body.entry === '1') {
                 if (idx < 0) {
                     atHome.push(userName);
@@ -328,16 +327,16 @@ function createAndSetObject(id, obj) {
 function checkCreateNewObjects() {
 
     function doIt() {
-        var fs = require('fs'),
-            io = fs.readFileSync(__dirname + "/io-package.json"),
-            objs = JSON.parse(io);
+        const fs = require('fs'),
+              io = fs.readFileSync(__dirname + "/io-package.json"),
+              objs = JSON.parse(io);
 
-        for (var i = 0; i < objs.instanceObjects.length; i++) {
+        for (let i = 0; i < objs.instanceObjects.length; i++) {
             createAndSetObject(objs.instanceObjects[i]._id, objs.instanceObjects[i]);
         }
     }
 
-    var timer = setTimeout(doIt, 2000);
+    const timer = setTimeout(doIt, 2000);
     adapter.getState(stateAtHome, function (err, obj) {
         clearTimeout(timer);
         if (!obj) {
