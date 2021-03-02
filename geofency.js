@@ -218,7 +218,7 @@ async function createObjects(id, b) {
         common: {name: 'entry', read: true, write: false, type: 'boolean'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".entry", obj);
+    await adapter.setObjectNotExistsAsync(id + ".entry", obj);
     children.push(obj);
     obj = {
         type: 'state',
@@ -226,49 +226,49 @@ async function createObjects(id, b) {
         common: {name: 'date', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".date", obj);
+    await adapter.setObjectNotExistsAsync(id + ".date", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'motion', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".motion", obj);
+    await adapter.setObjectNotExistsAsync(id + ".motion", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'name', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".name", obj);
+    await adapter.setObjectNotExistsAsync(id + ".name", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'currentLatitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".currentLatitude", obj);
+    await adapter.setObjectNotExistsAsync(id + ".currentLatitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'currentLongitude', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".currentLongitude", obj);
+    await adapter.setObjectNotExistsAsync(id + ".currentLongitude", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'lastLeave', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".lastLeave", obj);
+    await adapter.setObjectNotExistsAsync(id + ".lastLeave", obj);
     children.push(obj);
     obj = {
         type: 'state',
         common: {name: 'lastEnter', read: true, write: false, type: 'string'},
         native: {id: id}
     };
-    await adapter.setObjectNotExists(id + ".lastEnter", obj);
+    await adapter.setObjectNotExistsAsync(id + ".lastEnter", obj);
     children.push(obj);
 
 /*
@@ -281,7 +281,7 @@ async function createObjects(id, b) {
     }
 */
 
-    await adapter.setObjectNotExists(id, {
+    await adapter.setObjectNotExistsAsync(id, {
         type: 'device',
         //children: children,
         common: {id: id, name: b.name},
