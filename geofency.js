@@ -203,8 +203,8 @@ function setStates(id, jbody) {
     adapter.setState(id + '.' + lastStateNames[(jbody.entry == "1") ? 1 : 0], {val: ts, ack: true});
     adapter.setState(id + '.motion', {val: jbody.motion, ack: true});
     adapter.setState(id + '.name', {val: jbody.name, ack: true});
-    adapter.setState(id + '.currentLatitude', {val: jbody.currentLatitude, ack: true});
-    adapter.setState(id + '.currentLongitude', {val: jbody.currentLongitude, ack: true});
+    adapter.setState(id + '.currentLatitude', {val: jbody.latitude, ack: true});
+    adapter.setState(id + '.currentLongitude', {val: jbody.longitude, ack: true});
 }
 
 
