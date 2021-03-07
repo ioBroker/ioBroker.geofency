@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "geofency",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "news": {
+            "1.0.1": {
+                "en": "prevent warnings with js-controller 3.2",
+                "de": "Warnungen mit js-controller verhindern 3.2",
+                "ru": "предотвратить предупреждения с помощью js-controller 3.2",
+                "pt": "evitar avisos com js-controller 3.2",
+                "nl": "waarschuwingen voorkomen met js-controller 3.2",
+                "fr": "éviter les avertissements avec js-controller 3.2",
+                "it": "prevenire avvisi con js-controller 3.2",
+                "es": "prevenir advertencias con js-controller 3.2",
+                "pl": "zapobiegaj ostrzeżeniom za pomocą js-controller 3.2",
+                "zh-cn": "防止使用js-controller 3.2发出警告"
+            },
             "1.0.0": {
                 "en": "js-controller 2.0 is now needed at least\nAdd more JSON decoded states\nUpdate dependencies",
                 "de": "js-controller 2.0 wird jetzt mindestens benötigt\nFügen Sie weitere JSON-dekodierte Zustände hinzu\nAbhängigkeiten aktualisieren",
