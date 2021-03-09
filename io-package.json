@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "geofency",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "news": {
+            "1.0.2": {
+                "en": "optimize stop handling to really end the server",
+                "de": "Optimieren Sie die Stop-Behandlung, um den Server wirklich zu beenden",
+                "ru": "оптимизировать обработку останова, чтобы действительно завершить работу сервера",
+                "pt": "otimizar o manuseio de parada para realmente encerrar o servidor",
+                "nl": "optimaliseer de stopafhandeling om de server echt te beëindigen",
+                "fr": "optimiser la gestion des arrêts pour vraiment mettre fin au serveur",
+                "it": "ottimizzare la gestione delle interruzioni per terminare davvero il server",
+                "es": "optimizar el manejo de la parada para finalizar realmente el servidor",
+                "pl": "optymalizuj obsługę zatrzymań, aby naprawdę zakończyć działanie serwera",
+                "zh-cn": "优化停止处理以真正结束服务器"
+            },
             "1.0.1": {
                 "en": "prevent warnings with js-controller 3.2",
                 "de": "Warnungen mit js-controller verhindern 3.2",
