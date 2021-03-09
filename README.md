@@ -26,6 +26,9 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 
 ## Changelog
 
+### __WORK IN PROGRESS__
+* (Apollon77) optimize stop handling to really end the server
+
 ### 1.0.1 (2021-03-07)
 * (Apollon77) prevent warnings with js-controller 3.2
 

@@ -19,8 +19,10 @@ let adapter = utils.Adapter({
 
     unload: function (callback) {
         try {
-            adapter.log.info("terminating http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
-            callback();
+            webServer.close(() => {
+                adapter && adapter.log && adapter.log.info("terminated http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
+                callback();
+            });
         } catch (e) {
             callback();
         }
