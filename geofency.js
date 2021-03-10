@@ -41,6 +41,7 @@ function main() {
     if (adapter.config.activate_server !== undefined) activate_server = adapter.config.activate_server;
         else activate_server = true;
     if (activate_server) {
+        adapter.config.port = parseInt(adapter.config.port, 10);
         if (adapter.config.ssl) {
             // subscribe on changes of permissions
             adapter.subscribeForeignObjects('system.group.*');
