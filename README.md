@@ -26,7 +26,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 
 ## Changelog
 
-### __WORK IN PROGRESS__
+### 1.0.3 (2021-03-10)
 * (Apollon77) Fix port checks
 
 ### 1.0.2 (2021-03-09)
