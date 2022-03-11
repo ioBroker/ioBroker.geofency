@@ -13,6 +13,7 @@ const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 
 let webServer =  null;
 let activate_server = false;
+const objectsInitialized = {};
 
 let adapter = utils.Adapter({
     name: 'geofency',
@@ -20,7 +21,7 @@ let adapter = utils.Adapter({
     unload: function (callback) {
         try {
             webServer.close(() => {
-                adapter && adapter.log && adapter.log.info("terminated http" + (webServer.settings.secure ? "s" : "") + " server on port " + webServer.settings.port);
+                adapter && adapter.log && adapter.log.info(`terminated http${webServer.settings.secure ? "s" : ""} server on port ${webServer.settings.port}`);
                 callback();
             });
         } catch (e) {
@@ -28,7 +29,7 @@ let adapter = utils.Adapter({
         }
     },
     ready: function () {
-        adapter.log.info("Adapter got 'Ready' Signal - initiating Main function...");
+        adapter.log.info('Adapter got \'Ready\' Signal - initiating Main function...');
         main();
     },
     message: function (msg) {
@@ -37,9 +38,8 @@ let adapter = utils.Adapter({
 });
 
 function main() {
-    checkCreateNewObjects();
-    if (adapter.config.activate_server !== undefined) activate_server = adapter.config.activate_server;
-        else activate_server = true;
+    activate_server = adapter.config.activate_server !== undefined ? adapter.config.activate_server: true;
+
     if (activate_server) {
         adapter.config.port = parseInt(adapter.config.port, 10);
         if (adapter.config.ssl) {
@@ -103,11 +103,11 @@ function initWebServer(settings) {
     if (server.server) {
         adapter.getPort(settings.port, function (port) {
             if (port !== settings.port && !adapter.config.findNextPort) {
-                adapter.log.error('port ' + settings.port + ' already in use');
+                adapter.log.error(`port ${settings.port} already in use`);
                 process.exit(1);
             }
             server.server.listen(port);
-            adapter.log.info('http' + (settings.ssl ? 's' : '') + ' server listening on port ' + port);
+            adapter.log.info(`http${settings.ssl ? 's' : ''} server listening on port ${port}`);
         });
     }
 
@@ -124,7 +124,7 @@ function requestProcessor(req, res) {
 
     // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
     const auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
-    adapter.log.debug("Authorization Header is: ", auth);
+    adapter.log.debug(`Authorization Header is: ${JSON.stringify(auth)}`);
 
     let username = '';
     let password = '';
@@ -134,13 +134,13 @@ function requestProcessor(req, res) {
         const buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
         const plain_auth = buf.toString();        // read it back out as a string
 
-        adapter.log.debug("Decoded Authorization ", plain_auth);
+        adapter.log.debug(`Decoded Authorization ${plain_auth}`);
         // At this point plain_auth = "username:password"
         const creds = plain_auth.split(':');      // split on a ':'
         username = creds[0];
         password = creds[1];
         if ((username !== check_user) || (password !== check_pass)) {
-            adapter.log.warn("User credentials invalid");
+            adapter.log.warn('User credentials invalid');
             request_valid = false;
         }
     }
@@ -156,35 +156,40 @@ function requestProcessor(req, res) {
     if (req.method === 'POST') {
         let body = '';
 
-        adapter.log.debug("request path:" + req.path);
+        adapter.log.debug(`request path:${req.path}`);
 
-        req.on('data', function (chunk) {
+        req.on('data', (chunk) => {
             body += chunk;
         });
 
-        req.on('end', function () {
+        req.on('end', async () => {
             const user = req.url.slice(1);
-            const jbody = JSON.parse(body);
-
-            handleWebhookRequest(user, jbody);
+            try {
+                const jbody = JSON.parse(body);
+                await handleWebhookRequest(user, jbody);
+            } catch (err) {
+                adapter.log.info(`Could not process request for user ${user}: ${err}`);
+                res.writeHead(500);
+                res.write('Request error');
+                res.end();
+                return;
+            }
 
             res.writeHead(200);
-            res.write("OK");
+            res.write('OK');
             res.end();
         });
     }
     else {
         res.writeHead(500);
-        res.write("Request error");
+        res.write('Request error');
         res.end();
     }
 }
 
-const objectsInitialized = {};
-
 async function handleWebhookRequest(user, jbody) {
-    adapter.log.info("adapter geofency received webhook from device " + user + " with values: name: " + jbody.name + ", entry: " + jbody.entry);
-    const id = user + '.' + jbody.name.replace(/\s|\./g, '_');
+    adapter.log.info(`adapter geofency received webhook from device ${user} with values: name: ${jbody.name}, entry: ${jbody.entry}`);
+    const id = user.replace(adapter.FORBIDDEN_CHARS, '_').replace(/\s|\./g, '_') + '.' + jbody.name.replace(adapter.FORBIDDEN_CHARS, '_').replace(/\s|\./g, '_');
 
     if (!objectsInitialized[id]) {
         await createObjects(id, jbody);
@@ -194,102 +199,113 @@ async function handleWebhookRequest(user, jbody) {
     setAtHome(user, jbody);
 }
 
-const lastStateNames = ["lastLeave", "lastEnter"],
-      stateAtHomeCount = "atHomeCount",
-      stateAtHome = "atHome";
+const lastStateNames = ['lastLeave', 'lastEnter'],
+      stateAtHomeCount = 'atHomeCount',
+      stateAtHome = 'atHome';
 
 function setStates(id, jbody) {
-    adapter.setState(id + '.entry', {val: ((jbody.entry == "1") ? true : false), ack: true});
+    adapter.setState(id + '.entry', {val: (jbody.entry == '1'), ack: true});
 
-    const ts = adapter.formatDate(new Date(jbody.date), "YYYY-MM-DD hh:mm:ss");
-    adapter.setState(id + '.date', {val: ts, ack: true});
-    adapter.setState(id + '.' + lastStateNames[(jbody.entry == "1") ? 1 : 0], {val: ts, ack: true});
-    adapter.setState(id + '.motion', {val: jbody.motion, ack: true});
-    adapter.setState(id + '.name', {val: jbody.name, ack: true});
-    adapter.setState(id + '.currentLatitude', {val: jbody.latitude, ack: true});
-    adapter.setState(id + '.currentLongitude', {val: jbody.longitude, ack: true});
+    const ts = adapter.formatDate(new Date(jbody.date), 'YYYY-MM-DD hh:mm:ss');
+    adapter.setState(`${id}.date`, {val: ts, ack: true});
+    adapter.setState(`${id}.${lastStateNames[(jbody.entry == '1') ? 1 : 0]}`, {val: ts, ack: true});
+    adapter.setState(`${id}.motion`, {val: jbody.motion, ack: true});
+    adapter.setState(`${id}.name`, {val: jbody.name, ack: true});
+    adapter.setState(`${id}.currentLatitude`, {val: jbody.latitude, ack: true});
+    adapter.setState(`${id}.currentLongitude`, {val: jbody.longitude, ack: true});
+
+    adapter.setState(`${id}.json`, JSON.stringify(jbody));
+
+    for (const entry of Object.keys(jbody)) {
+        if (!objectsInitialized[`${id}.data.${entry}`]) continue;
+        adapter.setState(`${id}.data.${entry}`, jbody[entry]);
+    }
 }
 
 
-async function createObjects(id, b) {
+async function createObjects(id, body) {
     // create all Objects
-    const children = [];
+    await adapter.extendObjectAsync(id, {
+        type: 'device',
+        common: {name: body.name},
+        native: {name: body.name, lat: body.lat, long: body.long, radius: body.radius, device: body.device, beaconUUID: body.beaconUUID, major: body.major, minor: body.minor}
+    });
 
     let obj = {
         type: 'state',
-        //parent: id,
         common: {name: 'entry', read: true, write: false, type: 'boolean'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".entry", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".entry", obj);
     obj = {
         type: 'state',
-        //parent: id,
         common: {name: 'date', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".date", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".date", obj);
     obj = {
         type: 'state',
         common: {name: 'motion', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".motion", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".motion", obj);
     obj = {
         type: 'state',
         common: {name: 'name', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".name", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".name", obj);
     obj = {
         type: 'state',
         common: {name: 'currentLatitude', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".currentLatitude", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".currentLatitude", obj);
     obj = {
         type: 'state',
         common: {name: 'currentLongitude', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".currentLongitude", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".currentLongitude", obj);
     obj = {
         type: 'state',
         common: {name: 'lastLeave', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".lastLeave", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".lastLeave", obj);
     obj = {
         type: 'state',
         common: {name: 'lastEnter', read: true, write: false, type: 'string'},
-        native: {id: id}
+        native: {id}
     };
-    await adapter.setObjectNotExistsAsync(id + ".lastEnter", obj);
-    children.push(obj);
+    await adapter.extendObjectAsync(id + ".lastEnter", obj);
 
-/*
-    // Trouble with state names
+    obj = {
+        type: 'state',
+        common: {name: 'json', read: true, write: false, role: 'json', type: 'string'},
+        native: {id}
+    };
+    await adapter.extendObjectAsync(id + ".json", obj);
 
-    for (var i = 0; i < 2; i++) {
-        obj.common.name = lastStateNames[i];
-        adapter.setObjectNotExists(id + "." + lastStateNames[i], obj);
-        children.push(obj);
-    }
-*/
-
-    await adapter.setObjectNotExistsAsync(id, {
-        type: 'device',
-        //children: children,
-        common: {id: id, name: b.name},
-        native: {name: b.name, lat: b.lat, long: b.long, radius: b.radius, device: b.device, beaconUUID: b.beaconUUID, major: b.major, minor: b.minor}
+    await adapter.extendObjectAsync(id + '.data', {
+        type: 'channel',
+        common: {name: body.name + ' Data'},
+        native: {id}
     });
+
+    for (const entry of Object.keys(body)) {
+        let type = body[entry] !== null ? typeof body[entry] : 'mixed';
+        if (type === 'object') {
+            type = 'string';
+        }
+        obj = {
+            type: 'state',
+            common: {name: entry, read: true, write: false, type},
+            native: {id}
+        };
+        await adapter.extendObjectAsync(`${id}.data.${entry}`, obj);
+        objectsInitialized[`${id}.data.${entry}`] = true;
+    }
 }
 
 
@@ -316,35 +332,6 @@ function setAtHome(userName, body) {
             }
             if (atHomeCount !== atHome.length) adapter.setState(stateAtHomeCount, atHome.length, true);
         });
-    });
-}
-
-
-function createAndSetObject(id, obj) {
-    adapter.setObjectNotExists(id, obj, function (err) {
-        adapter.setState(id, 0, true);
-    });
-
-}
-
-function checkCreateNewObjects() {
-
-    function doIt() {
-        const fs = require('fs'),
-              io = fs.readFileSync(__dirname + "/io-package.json"),
-              objs = JSON.parse(io);
-
-        for (let i = 0; i < objs.instanceObjects.length; i++) {
-            createAndSetObject(objs.instanceObjects[i]._id, objs.instanceObjects[i]);
-        }
-    }
-
-    const timer = setTimeout(doIt, 2000);
-    adapter.getState(stateAtHome, function (err, obj) {
-        clearTimeout(timer);
-        if (!obj) {
-            doIt();
-        }
     });
 }
 

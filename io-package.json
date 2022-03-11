@@ -72,8 +72,31 @@
                 "ru": "Обработка ошибок парсинга"
             }
         },
-        "title": "Geofency Adapter",
-        "desc": "listening for geofency events. Based on the location based mobile App (Geofency)",
+        "title": "Geofency",
+        "titleLang": {
+            "en": "Geofency",
+            "de": "Geofency",
+            "ru": "геозона",
+            "pt": "Geofence",
+            "nl": "Geofence",
+            "fr": "Géorepérage",
+            "it": "Geofence",
+            "es": "geocerca",
+            "pl": "Geofency",
+            "zh-cn": "地理围栏"
+        },
+        "desc": {
+            "en": "listening for geofency events. Based on the location based mobile App (Geofency)",
+            "de": "Hören auf Geofency-Ereignisse. Basierend auf der standortbasierten mobilen App (Geofency)",
+            "ru": "прослушивание событий геозоны. На основе мобильного приложения на основе местоположения (Geofency)",
+            "pt": "ouvindo eventos de geofence. Com base no aplicativo móvel baseado em localização (Geofency)",
+            "nl": "luisteren naar geofency-gebeurtenissen. Gebaseerd op de locatiegebaseerde mobiele app (Geofency)",
+            "fr": "à l'écoute des événements de geofency. Basé sur l'application mobile basée sur la localisation (Geofency)",
+            "it": "ascolto di eventi di geofency. Basato sull'app mobile basata sulla posizione (Geofency)",
+            "es": "escucha de eventos de geocercas. Basado en la aplicación móvil basada en la ubicación (Geofency)",
+            "pl": "nasłuchiwanie wydarzeń geofence. Na podstawie aplikacji mobilnej opartej na lokalizacji (Geofency)",
+            "zh-cn": "监听 geofency 事件。基于基于位置的移动应用程序（Geofency）"
+        },
         "platform": "Javascript/Node.js",
         "mode": "daemon",
         "icon": "geofency.png",
@@ -96,6 +119,9 @@
             "Daniel Schaedler <daniel.schaedler@gmail.com>",
             "Apollon77 <ingo@fischer-ka.de>"
         ],
+        "connectionType": "cloud",
+        "dataSource": "push",
+        "tier": 2,
         "dependencies": [
             {
                 "js-controller": ">=2.0.0"
@@ -121,7 +147,7 @@
                 "role": "state",
                 "read": true,
                 "write": false,
-                "def": 0,
+                "def": "",
                 "desc": "Present persons"
             },
             "native": {}
@@ -135,7 +161,7 @@
                 "role": "state",
                 "read": true,
                 "write": false,
-                "def": [],
+                "def": 0,
                 "desc": "Number of present persons"
             },
             "native": {}
