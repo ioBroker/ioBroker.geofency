@@ -21,7 +21,7 @@ let adapter = utils.Adapter({
     unload: function (callback) {
         try {
             webServer.close(() => {
-                adapter && adapter.log && adapter.log.info(`terminated http${webServer.settings.secure ? "s" : ""} server on port ${webServer.settings.port}`);
+                adapter && adapter.log && adapter.log.info(`http${webServer.settings.secure ? "s" : ""} server terminated on port ${webServer.settings.port}`);
                 callback();
             });
         } catch (e) {
@@ -29,7 +29,6 @@ let adapter = utils.Adapter({
         }
     },
     ready: function () {
-        adapter.log.info('Adapter got \'Ready\' Signal - initiating Main function...');
         main();
     },
     message: function (msg) {
@@ -38,6 +37,7 @@ let adapter = utils.Adapter({
 });
 
 function main() {
+    adapter.setState('info.connection', false, true);
     activate_server = adapter.config.activate_server !== undefined ? adapter.config.activate_server: true;
 
     if (activate_server) {
@@ -71,6 +71,8 @@ function main() {
         } else {
             webServer = initWebServer(adapter.config);
         }
+    } else {
+        adapter.setState('info.connection', true, true);
     }
 }
 
@@ -84,6 +86,7 @@ function initWebServer(settings) {
     if (settings.port) {
         if (settings.ssl) {
             if (!adapter.config.certificates) {
+                adapter.log.error(`Cannot start http${settings.ssl ? 's' : ''} server: SSL required but no certificates selected!`)
                 return null;
             }
         }
@@ -96,17 +99,23 @@ function initWebServer(settings) {
 
         server.server.__server = server;
     } else {
-        adapter.log.error('port missing');
-        process.exit(1);
+        adapter.log.error(`Cannot start http${settings.ssl ? 's' : ''} server: No port provided!`);
+        return;
     }
 
     if (server.server) {
         adapter.getPort(settings.port, function (port) {
             if (port !== settings.port && !adapter.config.findNextPort) {
-                adapter.log.error(`port ${settings.port} already in use`);
-                process.exit(1);
+                adapter.log.error(`Cannot start http${settings.ssl ? 's' : ''} server: Port ${settings.port} already in use!`);
+                return;
             }
-            server.server.listen(port);
+            try {
+                server.server.listen(port);
+            } catch (err) {
+                adapter.log.warn(`Cannot start http${settings.ssl ? 's' : ''} server: ${err.message}`);
+                return;
+            }
+            adapter.setState('info.connection', true, true);
             adapter.log.info(`http${settings.ssl ? 's' : ''} server listening on port ${port}`);
         });
     }

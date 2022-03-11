@@ -31,10 +31,11 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 ## Changelog
 
 ### __WORK IN PROGRESS__
+* IMPORTANT: Forbidden characters are now replaced by _ in generated State IDs. Because gave an error before should not be breaking 
 * (Apollon77) Add new json state with the json of the last incoming data
 * (Apollon77) Add new data channel under the user with all data fields from the incoming data as own states
 * (Apollon77) Add Sentry for crash-reporting
-* (Apollon77) Prevent some error cases
+* (Apollon77) Prevent some error cases reported
 
 ### 1.0.3 (2021-03-10)
 * (Apollon77) Fix port checks
