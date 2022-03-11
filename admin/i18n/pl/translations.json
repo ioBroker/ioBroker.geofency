@@ -1,0 +1,8 @@
+{
+    "activate_server": "Aktywuj serwer",
+    "atHome": "Nazwa domu",
+    "password": "Hasło",
+    "port": "Port",
+    "ssl": "Użyj SSL (https://)",
+    "user": "Użytkownik"
+}

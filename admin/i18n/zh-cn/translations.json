@@ -1,0 +1,8 @@
+{
+    "activate_server": "激活服务器",
+    "atHome": "房屋名称",
+    "password": "密码",
+    "port": "港口",
+    "ssl": "使用 SLL (https://)",
+    "user": "用户"
+}

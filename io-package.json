@@ -54,22 +54,50 @@
             "0.3.2": {
                 "en": "Fix Authentication",
                 "de": "Fehler bei Zugangsprüfung behoben",
-                "ru": "Fix Authentication"
+                "ru": "Fix Authentication",
+                "pt": "Corrigir autenticação",
+                "nl": "Verificatie repareren",
+                "fr": "Réparer l'authentification",
+                "it": "Correggi l'autenticazione",
+                "es": "Arreglar autenticación",
+                "pl": "Napraw uwierzytelnianie",
+                "zh-cn": "修复身份验证"
             },
             "0.3.0": {
                 "en": "Make sure 'entry' is really a boolean as defined in object",
                 "de": "Sicherstellen das 'entry' wirklich ein Boolean ist wie im Objekt definiert.",
-                "ru": "Make sure 'entry' is really a boolean as defined in object"
+                "ru": "Make sure 'entry' is really a boolean as defined in object",
+                "pt": "Certifique-se de que 'entry' é realmente um booleano conforme definido no objeto",
+                "nl": "Zorg ervoor dat 'entry' echt een boolean is zoals gedefinieerd in object",
+                "fr": "Assurez-vous que 'entry' est vraiment un booléen tel que défini dans object",
+                "it": "Assicurati che 'voce' sia davvero un booleano come definito nell'oggetto",
+                "es": "Asegúrese de que 'entrada' sea realmente un booleano como se define en el objeto",
+                "pl": "Upewnij się, że „wpis” jest naprawdę wartością logiczną zdefiniowaną w obiekcie",
+                "zh-cn": "确保 'entry' 确实是对象中定义的布尔值"
             },
             "0.2.0": {
                 "en": "Add Message handling to process webhook data received from other sources then own webserver",
                 "de": "Behandling von Messages hinzugefügt um Webhook-Daten aus anderen Quellen als dem eigenen Webserver zu verarbeiten",
-                "ru": "Add Message handling to process webhook data received from other sources then own webserver"
+                "ru": "Add Message handling to process webhook data received from other sources then own webserver",
+                "pt": "Adicionar manipulação de mensagens para processar dados de webhook recebidos de outras fontes e do próprio servidor da web",
+                "nl": "Add Berichtafhandeling om webhook-gegevens te verwerken die zijn ontvangen van andere bronnen dan de eigen webserver",
+                "fr": "Ajouter la gestion des messages pour traiter les données de webhook reçues d'autres sources puis de votre propre serveur web",
+                "it": "Aggiungi la gestione dei messaggi per elaborare i dati del webhook ricevuti da altre fonti, quindi il tuo server web",
+                "es": "Agregue el manejo de mensajes para procesar los datos de webhook recibidos de otras fuentes y luego del propio servidor web",
+                "pl": "Dodaj obsługę wiadomości, aby przetwarzać dane webhooka otrzymane z innych źródeł niż własny serwer WWW",
+                "zh-cn": "添加消息处理以处理从其他来源接收的 webhook 数据，然后拥有 webserver"
             },
             "0.1.6": {
                 "en": "Catch parse errors",
                 "de": "Bearbeite Parsefehler",
-                "ru": "Обработка ошибок парсинга"
+                "ru": "Обработка ошибок парсинга",
+                "pt": "Capturar erros de análise",
+                "nl": "Parseerfouten opvangen",
+                "fr": "Capturer les erreurs d'analyse",
+                "it": "Cattura gli errori di analisi",
+                "es": "Detectar errores de análisis",
+                "pl": "Złap błędy analizy",
+                "zh-cn": "捕获解析错误"
             }
         },
         "title": "Geofency",
@@ -126,7 +154,12 @@
             {
                 "js-controller": ">=2.0.0"
             }
-        ]
+        ],
+        "plugins": {
+            "sentry": {
+                "dsn": "https://0b29504f564a4bd4a05592560cf12f7f@sentry.iobroker.net/176"
+            }
+        }
     },
     "native": {
         "activate_server": true,

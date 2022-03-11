@@ -1,0 +1,8 @@
+{
+    "activate_server": "Server activeren",
+    "atHome": "Naam van huis",
+    "password": "Wachtwoord",
+    "port": "Haven",
+    "ssl": "Gebruik SLL (https://)",
+    "user": "Gebruiker"
+}

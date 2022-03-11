@@ -33,6 +33,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 ### __WORK IN PROGRESS__
 * (Apollon77) Add new json state with the json of the last incoming data
 * (Apollon77) Add new data channel under the user with all data fields from the incoming data as own states
+* (Apollon77) Add Sentry for crash-reporting
 * (Apollon77) Prevent some error cases
 
 ### 1.0.3 (2021-03-10)
