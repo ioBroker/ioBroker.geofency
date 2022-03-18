@@ -223,11 +223,11 @@ function setStates(id, jbody) {
     adapter.setState(`${id}.currentLatitude`, {val: jbody.latitude, ack: true});
     adapter.setState(`${id}.currentLongitude`, {val: jbody.longitude, ack: true});
 
-    adapter.setState(`${id}.json`, JSON.stringify(jbody));
+    adapter.setState(`${id}.json`, JSON.stringify(jbody), true);
 
     for (const entry of Object.keys(jbody)) {
         if (!objectsInitialized[`${id}.data.${entry}`]) continue;
-        adapter.setState(`${id}.data.${entry}`, jbody[entry]);
+        adapter.setState(`${id}.data.${entry}`, jbody[entry], true);
     }
 }
 
@@ -344,11 +344,15 @@ function setAtHome(userName, body) {
     });
 }
 
-function processMessage(message) {
+async function processMessage(message) {
     if (!message || !message.message.user || !message.message.data) return;
 
     adapter.log.info('Message received = ' + JSON.stringify(message));
 
-    handleWebhookRequest(message.message.user, message.message.data);
+    try {
+        await handleWebhookRequest(message.message.user, message.message.data);
+    } catch (err) {
+        adapter.log.info(`Could not process request for user ${message.message.user}: ${err}`);
+    }
 }
 

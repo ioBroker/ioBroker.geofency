@@ -29,6 +29,10 @@ It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
 ## Changelog
+
+### __WORK IN PROGRESS__
+* (Apollon77) Prevent warning logs for newly added states in last release
+
 ### 1.1.0 (2022-03-11)
 * IMPORTANT: Forbidden characters are now replaced by _ in generated State IDs. Because gave an error before should not be breaking 
 * (Apollon77) Add new json state with the json of the last incoming data
