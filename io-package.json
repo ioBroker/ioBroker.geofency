@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "geofency",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "Prevent warning logs for newly added states in last release",
+        "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
+        "ru": "Предотвратить ведение журналов предупреждений для вновь добавленных состояний в последнем выпуске",
+        "pt": "Impedir logs de aviso para estados recém-adicionados na última versão",
+        "nl": "Voorkom waarschuwingslogboeken voor nieuw toegevoegde statussen in de laatste release",
+        "fr": "Empêcher les journaux d'avertissement pour les états nouvellement ajoutés dans la dernière version",
+        "it": "Impedisci i registri di avviso per i nuovi stati aggiunti nell'ultima versione",
+        "es": "Evite los registros de advertencia para los estados recién agregados en la última versión",
+        "pl": "Zapobiegaj dziennikom ostrzeżeń dla nowo dodanych stanów w ostatniej wersji",
+        "zh-cn": "防止上一个版本中新添加状态的警告日志"
+      },
       "1.1.0": {
         "en": "IMPORTANT: Forbidden characters are now replaced by _ in generated State IDs. Because gave an error before should not be breaking \nAdd new json state with the json of the last incoming data\nAdd new data channel under the user with all data fields from the incoming data as own states\nAdd Sentry for crash-reporting\nPrevent some error cases reported",
         "de": "WICHTIG: Verbotene Zeichen werden jetzt in generierten Status-IDs durch _ ersetzt. Weil vorher ein Fehler auftrat, sollte es nicht brechen\nFügen Sie einen neuen JSON-Status mit dem JSON der letzten eingehenden Daten hinzu\nNeuen Datenkanal unter dem Benutzer mit allen Datenfeldern aus den eingehenden Daten als eigene Zustände hinzufügen\nFügen Sie Sentry für die Absturzmeldung hinzu\nEinige gemeldete Fehlerfälle verhindern",
@@ -74,18 +86,6 @@
         "es": "Arreglar autenticación",
         "pl": "Napraw uwierzytelnianie",
         "zh-cn": "修复身份验证"
-      },
-      "0.3.0": {
-        "en": "Make sure 'entry' is really a boolean as defined in object",
-        "de": "Sicherstellen das 'entry' wirklich ein Boolean ist wie im Objekt definiert.",
-        "ru": "Make sure 'entry' is really a boolean as defined in object",
-        "pt": "Certifique-se de que 'entry' é realmente um booleano conforme definido no objeto",
-        "nl": "Zorg ervoor dat 'entry' echt een boolean is zoals gedefinieerd in object",
-        "fr": "Assurez-vous que 'entry' est vraiment un booléen tel que défini dans object",
-        "it": "Assicurati che 'voce' sia davvero un booleano come definito nell'oggetto",
-        "es": "Asegúrese de que 'entrada' sea realmente un booleano como se define en el objeto",
-        "pl": "Upewnij się, że „wpis” jest naprawdę wartością logiczną zdefiniowaną w obiekcie",
-        "zh-cn": "确保 'entry' 确实是对象中定义的布尔值"
       }
     },
     "title": "Geofency",
