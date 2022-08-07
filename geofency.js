@@ -60,11 +60,32 @@ function main() {
                 ) {
                     adapter.log.error('Cannot enable secure web server, because no certificates found: ' + adapter.config.certPublic + ', ' + adapter.config.certPrivate);
                 } else {
-                    adapter.config.certificates = {
-                        key: obj.native.certificates[adapter.config.certPrivate],
-                        cert: obj.native.certificates[adapter.config.certPublic]
-                    };
+                    // if pub cert not starts with '----' expect it's a path to the certificate and try to load the cert content
+                    var pub_cert = String(obj.native.certificates[adapter.config.certPublic]);
+                    if (! pub_cert.startsWith('----')) {
+                        var fs = require('fs');
+                        var contents = fs.readFileSync(pub_cert, 'utf8', (err));
+                        if ( ! err) {
+                            adapter.log.info(`Read public certificate from file \'${pub_cert}\'.`);
+                            pub_cert = contents;
+                        }
+                    }
 
+                    // if pub cert not starts with '----' expect it's a path to the certificate and try to load the cert content
+                    var priv_cert = String(obj.native.certificates[adapter.config.certPrivate]);
+                    if (! priv_cert.startsWith('----')) {
+                        var fs = require('fs');
+                        var contents = fs.readFileSync(priv_cert, 'utf8', (err));
+                        if ( ! err) {
+                            adapter.log.info(`Read private certificate from file \'${priv_cert}\'.`);
+                            priv_cert = contents;
+                        }
+                    }
+
+                    adapter.config.certificates = {
+                        key: priv_cert,
+                        cert: pub_cert
+                    };
                 }
                 webServer = initWebServer(adapter.config);
             });
