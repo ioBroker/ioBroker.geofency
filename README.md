@@ -27,7 +27,12 @@ http://forum.iobroker.net/viewtopic.php?f=20&t=2076
 It is not recommended to expose this adapter to the public internet.
 Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx is nice and easy to configure).
 
+<!--
+    Placeholder for the next version (at the beginning of the line):
+    ### **WORK IN PROGRESS**
+-->
 ## Changelog
+### **WORK IN PROGRESS**
 * (bluefox) Added JSON config and made refactoring
 * (atl285) Corrected handling of SSL certificates
 
