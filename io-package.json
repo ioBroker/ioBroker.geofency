@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "geofency",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "news": {
+      "1.2.0": {
+        "en": "Added JSON config and made refactoring\nCorrected handling of SSL certificates",
+        "de": "Hinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
+        "ru": "Добавил конфиг JSON и сделал рефакторинг\nИсправлена обработка SSL сертификатов",
+        "pt": "Adicionado JSON config e feito refactoring\nManuseio correto de certificados SSL",
+        "nl": "_\nVertaling:",
+        "fr": "Ajout de la configuration JSON et refactoring\nManipulation corrigée des certificats SSL",
+        "it": "Aggiunto JSON config e fatto refactoring\nGestione corretta dei certificati SSL",
+        "es": "Añadido JSON config y hecho refactoring\nManejo corregido de certificados SSL",
+        "pl": "Added JSON konfiguje i dostosowuje do regeneracji\nPoprawne traktowanie certyfikatów SSL",
+        "zh-cn": "增加联合协商会,并重新准备\n职业证书的处理"
+      },
       "1.1.1": {
         "en": "Prevent warning logs for newly added states in last release",
         "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
@@ -74,18 +86,6 @@
         "es": "js-controller 2.0 ahora se necesita al menos\nAgregar más estados decodificados JSON\nActualizar dependencias",
         "pl": "js-controller 2.0 jest teraz potrzebny przynajmniej\nDodaj więcej stanów zdekodowanych w formacie JSON\nZaktualizuj zależności",
         "zh-cn": "现在至少需要js-controller 2.0\n添加更多JSON解码状态\n更新依赖"
-      },
-      "0.3.2": {
-        "en": "Fix Authentication",
-        "de": "Fehler bei Zugangsprüfung behoben",
-        "ru": "Fix Authentication",
-        "pt": "Corrigir autenticação",
-        "nl": "Verificatie repareren",
-        "fr": "Réparer l'authentification",
-        "it": "Correggi l'autenticazione",
-        "es": "Arreglar autenticación",
-        "pl": "Napraw uwierzytelnianie",
-        "zh-cn": "修复身份验证"
       }
     },
     "title": "Geofency",
