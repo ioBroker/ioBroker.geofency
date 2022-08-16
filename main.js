@@ -5,42 +5,46 @@
  *
  */
 
-/* jshint -W097 */// jshint strict:false
-/*jslint node: true */
-"use strict";
+/* jshint -W097 */
+/* jshint strict: false */
+/* jslint node: true */
+'use strict';
 
-const utils = require('@iobroker/adapter-core'); // Get common adapter utils
+const utils       = require('@iobroker/adapter-core'); // Get common adapter utils
+const adapterName = require('./package.json').name.split('.').pop();
 
 let webServer =  null;
-let activate_server = false;
+let activateServer = false;
+let adapter;
 const objectsInitialized = {};
 
-let adapter = utils.Adapter({
-    name: 'geofency',
-
-    unload: function (callback) {
-        try {
-            webServer.close(() => {
-                adapter && adapter.log && adapter.log.info(`http${webServer.settings.secure ? "s" : ""} server terminated on port ${webServer.settings.port}`);
+function startAdapter(options) {
+    options = options || {};
+    Object.assign(options, {
+        name: adapterName,
+        unload: callback => {
+            try {
+                webServer.close(() => {
+                    adapter && adapter.log && adapter.log.info(`http${webServer.settings.secure ? 's' : ''} server terminated on port ${webServer.settings.port}`);
+                    callback();
+                });
+            } catch (e) {
                 callback();
-            });
-        } catch (e) {
-            callback();
-        }
-    },
-    ready: function () {
-        main();
-    },
-    message: function (msg) {
-        processMessage(msg);
-    }
-});
+            }
+        },
+        ready: () => main(),
+        message: msg => processMessage(msg),
+    });
+    adapter = new utils.Adapter(options);
+
+    return adapter;
+}
 
 function main() {
     adapter.setState('info.connection', false, true);
-    activate_server = adapter.config.activate_server !== undefined ? adapter.config.activate_server: true;
+    activateServer = adapter.config.activate_server !== undefined ? adapter.config.activate_server: true;
 
-    if (activate_server) {
+    if (activateServer) {
         adapter.config.port = parseInt(adapter.config.port, 10);
         if (adapter.config.ssl) {
             // subscribe on changes of permissions
@@ -55,38 +59,8 @@ function main() {
             }
 
             // Load certificates
-            adapter.getForeignObject('system.certificates', function (err, obj) {
-                if (err || !obj || !obj.native.certificates || !adapter.config.certPublic || !adapter.config.certPrivate || !obj.native.certificates[adapter.config.certPublic] || !obj.native.certificates[adapter.config.certPrivate]
-                ) {
-                    adapter.log.error('Cannot enable secure web server, because no certificates found: ' + adapter.config.certPublic + ', ' + adapter.config.certPrivate);
-                } else {
-                    // if pub cert not starts with '----' expect it's a path to the certificate and try to load the cert content
-                    var pub_cert = String(obj.native.certificates[adapter.config.certPublic]);
-                    if (! pub_cert.startsWith('----')) {
-                        var fs = require('fs');
-                        var contents = fs.readFileSync(pub_cert, 'utf8', (err));
-                        if ( ! err) {
-                            adapter.log.info(`Read public certificate from file \'${pub_cert}\'.`);
-                            pub_cert = contents;
-                        }
-                    }
-
-                    // if pub cert not starts with '----' expect it's a path to the certificate and try to load the cert content
-                    var priv_cert = String(obj.native.certificates[adapter.config.certPrivate]);
-                    if (! priv_cert.startsWith('----')) {
-                        var fs = require('fs');
-                        var contents = fs.readFileSync(priv_cert, 'utf8', (err));
-                        if ( ! err) {
-                            adapter.log.info(`Read private certificate from file \'${priv_cert}\'.`);
-                            priv_cert = contents;
-                        }
-                    }
-
-                    adapter.config.certificates = {
-                        key: priv_cert,
-                        cert: pub_cert
-                    };
-                }
+            adapter.getCertificates(certificates => {
+                adapter.config.certificates = certificates;
                 webServer = initWebServer(adapter.config);
             });
         } else {
@@ -98,7 +72,6 @@ function main() {
 }
 
 function initWebServer(settings) {
-
     const server = {
         server:    null,
         settings:  settings
@@ -125,7 +98,7 @@ function initWebServer(settings) {
     }
 
     if (server.server) {
-        adapter.getPort(settings.port, function (port) {
+        adapter.getPort(settings.port, port => {
             if (port !== settings.port && !adapter.config.findNextPort) {
                 adapter.log.error(`Cannot start http${settings.ssl ? 's' : ''} server: Port ${settings.port} already in use!`);
                 return;
@@ -149,8 +122,8 @@ function initWebServer(settings) {
 }
 
 function requestProcessor(req, res) {
-    const check_user = adapter.config.user;
-    const check_pass = adapter.config.pass;
+    const checkUser = adapter.config.user;
+    const checkPass = adapter.config.pass;
 
     // If they pass in a basic auth credential it'll be in a header called "Authorization" (note NodeJS lowercases the names of headers in its request object)
     const auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
@@ -159,7 +132,7 @@ function requestProcessor(req, res) {
     let username = '';
     let password = '';
     let request_valid = true;
-    if (auth && check_user.length > 0 && check_pass.length > 0) {
+    if (auth && checkUser.length > 0 && checkPass.length > 0) {
         const tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
         const buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
         const plain_auth = buf.toString();        // read it back out as a string
@@ -169,7 +142,7 @@ function requestProcessor(req, res) {
         const creds = plain_auth.split(':');      // split on a ':'
         username = creds[0];
         password = creds[1];
-        if ((username !== check_user) || (password !== check_pass)) {
+        if (username !== checkUser || password !== checkPass) {
             adapter.log.warn('User credentials invalid');
             request_valid = false;
         }
@@ -188,9 +161,7 @@ function requestProcessor(req, res) {
 
         adapter.log.debug(`request path:${req.path}`);
 
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
+        req.on('data', chunk => body += chunk);
 
         req.on('end', async () => {
             const user = req.url.slice(1);
@@ -225,30 +196,32 @@ async function handleWebhookRequest(user, jbody) {
         await createObjects(id, jbody);
         objectsInitialized[id] = true;
     }
-    setStates(id, jbody);
-    setAtHome(user, jbody);
+    await setStates(id, jbody);
+    await setAtHome(user, jbody);
 }
 
-const lastStateNames = ['lastLeave', 'lastEnter'],
-      stateAtHomeCount = 'atHomeCount',
-      stateAtHome = 'atHome';
+const lastStateNames = ['lastLeave', 'lastEnter'];
+const stateAtHomeCount = 'atHomeCount';
+const stateAtHome = 'atHome';
 
-function setStates(id, jbody) {
-    adapter.setState(id + '.entry', {val: (jbody.entry == '1'), ack: true});
+async function setStates(id, jBody) {
+    adapter.setState(id + '.entry', {val: jBody.entry == '1', ack: true});
 
-    const ts = adapter.formatDate(new Date(jbody.date), 'YYYY-MM-DD hh:mm:ss');
-    adapter.setState(`${id}.date`, {val: ts, ack: true});
-    adapter.setState(`${id}.${lastStateNames[(jbody.entry == '1') ? 1 : 0]}`, {val: ts, ack: true});
-    adapter.setState(`${id}.motion`, {val: jbody.motion, ack: true});
-    adapter.setState(`${id}.name`, {val: jbody.name, ack: true});
-    adapter.setState(`${id}.currentLatitude`, {val: jbody.latitude, ack: true});
-    adapter.setState(`${id}.currentLongitude`, {val: jbody.longitude, ack: true});
+    const ts = adapter.formatDate(new Date(jBody.date), 'YYYY-MM-DD hh:mm:ss');
+    await adapter.setStateAsync(`${id}.date`, {val: ts, ack: true});
+    await adapter.setStateAsync(`${id}.${lastStateNames[jBody.entry == '1' ? 1 : 0]}`, {val: ts, ack: true});
+    await adapter.setStateAsync(`${id}.motion`, {val: jBody.motion, ack: true});
+    await adapter.setStateAsync(`${id}.name`, {val: jBody.name, ack: true});
+    await adapter.setStateAsync(`${id}.currentLatitude`, {val: jBody.latitude, ack: true});
+    await adapter.setStateAsync(`${id}.currentLongitude`, {val: jBody.longitude, ack: true});
 
-    adapter.setState(`${id}.json`, JSON.stringify(jbody), true);
+    await adapter.setStateAsync(`${id}.json`, JSON.stringify(jBody), true);
 
-    for (const entry of Object.keys(jbody)) {
-        if (!objectsInitialized[`${id}.data.${entry}`]) continue;
-        adapter.setState(`${id}.data.${entry}`, jbody[entry], true);
+    for (const entry of Object.keys(jBody)) {
+        if (!objectsInitialized[`${id}.data.${entry}`]) {
+            continue;
+        }
+        await adapter.setStateAsync(`${id}.data.${entry}`, jBody[entry], true);
     }
 }
 
@@ -266,56 +239,56 @@ async function createObjects(id, body) {
         common: {name: 'entry', read: true, write: false, type: 'boolean'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".entry", obj);
+    await adapter.extendObjectAsync(`${id}.entry`, obj);
     obj = {
         type: 'state',
         common: {name: 'date', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".date", obj);
+    await adapter.extendObjectAsync(`${id}.date`, obj);
     obj = {
         type: 'state',
         common: {name: 'motion', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".motion", obj);
+    await adapter.extendObjectAsync(`${id}.motion`, obj);
     obj = {
         type: 'state',
         common: {name: 'name', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".name", obj);
+    await adapter.extendObjectAsync(`${id}.name`, obj);
     obj = {
         type: 'state',
         common: {name: 'currentLatitude', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".currentLatitude", obj);
+    await adapter.extendObjectAsync(`${id}.currentLatitude`, obj);
     obj = {
         type: 'state',
         common: {name: 'currentLongitude', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".currentLongitude", obj);
+    await adapter.extendObjectAsync(`${id}.currentLongitude`, obj);
     obj = {
         type: 'state',
         common: {name: 'lastLeave', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".lastLeave", obj);
+    await adapter.extendObjectAsync(`${id}.lastLeave`, obj);
     obj = {
         type: 'state',
         common: {name: 'lastEnter', read: true, write: false, type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".lastEnter", obj);
+    await adapter.extendObjectAsync(`${id}.lastEnter`, obj);
 
     obj = {
         type: 'state',
         common: {name: 'json', read: true, write: false, role: 'json', type: 'string'},
         native: {id}
     };
-    await adapter.extendObjectAsync(id + ".json", obj);
+    await adapter.extendObjectAsync(`${id}.json`, obj);
 
     await adapter.extendObjectAsync(id + '.data', {
         type: 'channel',
@@ -338,37 +311,42 @@ async function createObjects(id, body) {
     }
 }
 
+async function setAtHome(userName, body) {
+    if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) {
+        return;
+    }
+    let atHomeCount;
+    let atHome;
 
-function setAtHome(userName, body) {
-    if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) return;
-    let atHomeCount, atHome;
-    adapter.getState(stateAtHomeCount, function (err, obj) {
-        if (err) return;
-        atHomeCount = obj ? obj.val : 0;
-        adapter.getState(stateAtHome, function (err, obj) {
-            if (err) return;
-            atHome = obj ? (obj.val ? JSON.parse(obj.val) : []) : [];
-            const idx = atHome.indexOf(userName);
-            if (body.entry === '1') {
-                if (idx < 0) {
-                    atHome.push(userName);
-                    adapter.setState(stateAtHome, JSON.stringify(atHome), true);
-                }
-            } else {
-                if (idx >= 0) {
-                    atHome.splice(idx, 1);
-                    adapter.setState(stateAtHome, JSON.stringify(atHome), true);
-                }
-            }
-            if (atHomeCount !== atHome.length) adapter.setState(stateAtHomeCount, atHome.length, true);
-        });
-    });
+    const _stateAtHomeCount = await adapter.getStateAsync(stateAtHomeCount);
+    atHomeCount = _stateAtHomeCount ? _stateAtHomeCount.val : 0;
+
+    const _stateAtHome = await adapter.getStateAsync(stateAtHome);
+    atHome = _stateAtHome ? (_stateAtHome.val ? JSON.parse(_stateAtHome.val) : []) : [];
+
+    if (body.entry === '1') {
+        if (!atHome.includes(userName)) {
+            atHome.push(userName);
+            await adapter.setStateAsync(stateAtHome, JSON.stringify(atHome), true);
+        }
+    } else {
+        const idx = atHome.indexOf(userName);
+        if (idx !== -1) {
+            atHome.splice(idx, 1);
+            await adapter.setStateAsync(stateAtHome, JSON.stringify(atHome), true);
+        }
+    }
+    if (atHomeCount !== atHome.length) {
+        await adapter.setStateAsync(stateAtHomeCount, atHome.length, true);
+    }
 }
 
 async function processMessage(message) {
-    if (!message || !message.message.user || !message.message.data) return;
+    if (!message || !message.message.user || !message.message.data) {
+        return;
+    }
 
-    adapter.log.info('Message received = ' + JSON.stringify(message));
+    adapter.log.info(`Message received = ${JSON.stringify(message)}`);
 
     try {
         await handleWebhookRequest(message.message.user, message.message.data);
@@ -377,3 +355,10 @@ async function processMessage(message) {
     }
 }
 
+// If started as allInOne/compact mode => return function to create instance
+if (module && module.parent) {
+    module.exports = startAdapter;
+} else {
+    // or start the instance directly
+    startAdapter();
+}

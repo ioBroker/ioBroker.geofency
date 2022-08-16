@@ -18,7 +18,6 @@
     "url": "https://github.com/ioBroker/ioBroker.geofency"
   },
   "dependencies": {
-    "request": "^2.88.2",
     "@iobroker/adapter-core": "^2.6.0"
   },
   "devDependencies": {
@@ -33,7 +32,14 @@
   "bugs": {
     "url": "https://github.com/ioBroker/ioBroker.geofency/issues"
   },
-  "main": "geofency.js",
+  "main": "main.js",
+  "files": [
+    "admin/",
+    "lib/",
+    "main.js",
+    "io-package.json",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit",
     "release": "release-script"

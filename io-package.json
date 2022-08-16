@@ -138,6 +138,7 @@
     "connectionType": "cloud",
     "dataSource": "push",
     "tier": 2,
+    "compact": true,
     "dependencies": [
       {
         "js-controller": ">=2.0.0"
@@ -147,6 +148,9 @@
       "sentry": {
         "dsn": "https://0b29504f564a4bd4a05592560cf12f7f@sentry.iobroker.net/176"
       }
+    },
+    "adminUI": {
+      "config": "json"
     }
   },
   "native": {
@@ -155,7 +159,9 @@
     "ssl": false,
     "user": "geo",
     "pass": "geo",
-    "atHome": "Home"
+    "atHome": "Home",
+    "certPrivate": "",
+    "certPublic": ""
   },
   "objects": [],
   "instanceObjects": [

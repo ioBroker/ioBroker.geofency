@@ -1,8 +1,19 @@
 {
-    "activate_server": "激活服务器",
-    "atHome": "房屋名称",
-    "password": "密码",
-    "port": "港口",
-    "ssl": "使用 SLL (https://)",
-    "user": "用户"
+  "activate_server": "激活服务器",
+  "atHome": "房屋名称",
+  "password": "密码",
+  "port": "港口",
+  "ssl": "使用 SSL (https://)",
+  "user": "用户",
+  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "设置用户名和密码以验证您的地理围栏设备。在您的移动应用 webhook 设置中使用相同的值。",
+  "Geofency is listening for events on this port": "Geofency 正在侦听此端口上的事件",
+  "Geofency mobile app": "地理围栏移动应用",
+  "Download geofency for your device": "为您的设备下载地理围栏",
+  "For any new location -> properties -> webhook settings:": "对于任何新位置 -> 属性 -> webhook 设置：",
+  "-> URL for entry and exit: <your ioBroker Domain>:<port from above>/<any location name>": "-> 进入和退出的 URL：<您的 ioBroker 域>:<port from above>/<any location name>",
+  "-> Post Format: JSON-encoded: enabled": "-> 帖子格式：JSON 编码：启用",
+  "-> authentication: set user / password from above": "-> 身份验证：从上面设置用户/密码",
+  "Chained certificate": "链式证书",
+  "Private certificate": "私人证书",
+  "Public certificate": "公共证书"
 }

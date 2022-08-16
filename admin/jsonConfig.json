@@ -1,0 +1,143 @@
+{
+  "type": "panel",
+  "i18n": true,
+  "items": {
+    "atHome": {
+      "label": "atHome",
+      "type": "text",
+      "sm": 12,
+      "md": 12,
+      "lg": 4
+    },
+    "activate_server":{
+      "newLine": true,
+      "type": "checkbox",
+      "label": "activate_server",
+      "sm": 12,
+      "md": 6,
+      "lg": 2
+    },
+    "port": {
+      "label": "port",
+      "type": "text",
+      "sm": 12,
+      "md": 6,
+      "lg": 2,
+      "hidden": "!data.activate_server",
+      "help": "Geofency is listening for events on this port"
+    },
+    "ssl": {
+      "newLine": true,
+      "label": "ssl",
+      "type": "checkbox",
+      "sm": 12,
+      "md": 6,
+      "lg": 2,
+      "hidden": "!data.activate_server"
+    },
+    "certPublic": {
+      "type": "certificate",
+      "hidden": "!data.ssl || !data.activate_server",
+      "certType": "public",
+      "validator": "!data.ssl || data.certPublic",
+      "label": "Public certificate",
+      "sm": 12,
+      "md": 6,
+      "lg": 2
+    },
+    "certPrivate": {
+      "hidden": "!data.ssl || !data.activate_server",
+      "type": "certificate",
+      "certType": "private",
+      "validator": "!data.ssl || data.certPrivate",
+      "label": "Private certificate",
+      "sm": 12,
+      "md": 6,
+      "lg": 2
+    },
+    "certChained": {
+      "hidden": "!data.ssl || !data.activate_server",
+      "type": "certificate",
+      "certType": "chained",
+      "label": "Chained certificate",
+      "sm": 12,
+      "md": 6,
+      "lg": 2
+    },
+    "_static": {
+      "newLine": true,
+      "type": "staticText",
+      "text": "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.",
+      "hidden": "!data.activate_server",
+      "sm": 12
+    },
+    "user": {
+      "newLine": true,
+      "label": "user",
+      "type": "text",
+      "sm": 12,
+      "md": 6,
+      "lg": 2,
+      "hidden": "!data.activate_server"
+    },
+    "pass": {
+      "label": "password",
+      "repeat": true,
+      "type": "password",
+      "sm": 12,
+      "md": 6,
+      "lg": 2,
+      "hidden": "!data.activate_server"
+    },
+    "_info": {
+      "newLine": true,
+      "type": "header",
+      "sm": 12,
+      "size": 4,
+      "text": "Geofency mobile app"
+    },
+    "_info2": {
+      "type": "staticLink",
+      "lg": 3,
+      "md": 6,
+      "sm": 12,
+      "button": true,
+      "color": "primary",
+      "text": "Download geofency for your device",
+      "href": "http://www.geofency.com/"
+    },
+    "_info3": {
+      "newLine": true,
+      "type": "staticText",
+      "sm": 6,
+      "text": "For any new location -> properties -> webhook settings:"
+    },
+    "_info4": {
+      "newLine": true,
+      "type": "staticText",
+      "sm": 12,
+      "style": {
+        "listStyleType": "disc"
+      },
+      "text": "-> URL for entry and exit: <your ioBroker Domain>:<port from above>/<any location name>"
+    },
+    "_info5": {
+      "newLine": true,
+      "type": "staticText",
+      "sm": 12,
+      "style": {
+        "listStyleType": "disc"
+      },
+      "text": "-> Post Format: JSON-encoded: enabled"
+    },
+    "_info6": {
+      "newLine": true,
+      "type": "staticText",
+      "sm": 12,
+      "style": {
+        "listStyleType": "disc"
+      },
+      "text": "-> authentication: set user / password from above"
+    }
+  }
+}

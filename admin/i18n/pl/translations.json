@@ -1,8 +1,19 @@
 {
-    "activate_server": "Aktywuj serwer",
-    "atHome": "Nazwa domu",
-    "password": "Hasło",
-    "port": "Port",
-    "ssl": "Użyj SSL (https://)",
-    "user": "Użytkownik"
+  "activate_server": "Aktywuj serwer",
+  "atHome": "Nazwa domu",
+  "password": "Hasło",
+  "port": "Port",
+  "ssl": "Użyj SSL (https://)",
+  "user": "Użytkownik",
+  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Ustaw nazwę użytkownika i hasło do uwierzytelniania urządzenia Geofency. Użyj tych samych wartości w ustawieniach webhooka aplikacji mobilnej.",
+  "Geofency is listening for events on this port": "Geofency nasłuchuje wydarzeń na tym porcie",
+  "Geofency mobile app": "Aplikacja mobilna Geofency",
+  "Download geofency for your device": "Pobierz Geofency na swoje urządzenie",
+  "For any new location -> properties -> webhook settings:": "Dla każdej nowej lokalizacji -> właściwości -> ustawienia webhooka:",
+  "-> URL for entry and exit: <your ioBroker Domain>:<port from above>/<any location name>": "-> URL wejścia i wyjścia: <twoja domena ioBroker>:<port z góry>/<dowolna nazwa lokalizacji>",
+  "-> Post Format: JSON-encoded: enabled": "-> Format postu: zakodowany w formacie JSON: włączony",
+  "-> authentication: set user / password from above": "-> uwierzytelnianie: ustaw użytkownika/hasło z góry",
+  "Chained certificate": "Przykuty certyfikat",
+  "Private certificate": "Certyfikat prywatny",
+  "Public certificate": "Certyfikat publiczny"
 }
