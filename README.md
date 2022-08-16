@@ -32,7 +32,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### **WORK IN PROGRESS**
+### 1.2.1 (2022-08-16)
 * (bluefox) Corrected error with no credentials
 * (bluefox) Added JSON config and made refactoring
 * (atl285) Corrected handling of SSL certificates

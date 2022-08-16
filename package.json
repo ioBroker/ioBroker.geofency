@@ -1,6 +1,6 @@
 {
   "name": "iobroker.geofency",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "geofency adapter for ioBroker",
   "author": "Daniel Schaedler <daniel.schaedler@gmail.com>",
   "contributors": [

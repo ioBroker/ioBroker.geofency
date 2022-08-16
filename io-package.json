@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "geofency",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "news": {
+      "1.2.1": {
+        "en": "Corrected error with no credentials\nAdded JSON config and made refactoring\nCorrected handling of SSL certificates",
+        "de": "Korrigierter Fehler ohne Anmeldeinformationen\nHinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
+        "ru": "Исправлена ошибка без учетных данных\nДобавил конфиг JSON и сделал рефакторинг\nИсправлена обработка SSL сертификатов",
+        "pt": "Erro corrigido sem credenciais\nAdicionado JSON config e feito refactoring\nManuseio correto de certificados SSL",
+        "nl": "Gecorrigeerde fout zonder referenties\n_\nVertaling:",
+        "fr": "Erreur corrigée sans accréditation\nAjout de la configuration JSON et refactoring\nManipulation corrigée des certificats SSL",
+        "it": "Errore corretto senza credenziali\nAggiunto JSON config e fatto refactoring\nGestione corretta dei certificati SSL",
+        "es": "Error corregido sin credenciales\nAñadido JSON config y hecho refactoring\nManejo corregido de certificados SSL",
+        "pl": "Nieprawdopodobny błąd bez grzebienia\nAdded JSON konfiguje i dostosowuje do regeneracji\nPoprawne traktowanie certyfikatów SSL",
+        "zh-cn": "没有全权证书的更正错误\n增加联合协商会,并重新准备\n职业证书的处理"
+      },
       "1.1.1": {
         "en": "Prevent warning logs for newly added states in last release",
         "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
