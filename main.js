@@ -129,29 +129,26 @@ function requestProcessor(req, res) {
     const auth = req.headers.authorization;  // auth is in base64(username:password)  so we need to decode the base64
     adapter.log.debug(`Authorization Header is: ${JSON.stringify(auth)}`);
 
-    let username = '';
-    let password = '';
-    let request_valid = true;
-    if (auth && checkUser.length > 0 && checkPass.length > 0) {
-        const tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
-        const buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
-        const plain_auth = buf.toString();        // read it back out as a string
+    let requestValid = true;
+    if (checkUser && checkPass) {
+        if (!auth) {
+            adapter.log.warn('Authorization Header missing but user/pass defined');
+            requestValid = false;
+        } else {
+            const tmp = auth.split(' ');   // Split on a space, the original auth looks like  "Basic Y2hhcmxlczoxMjM0NQ==" and we need the 2nd part
+            const plainAuth = Buffer.from(tmp[1], 'base64').toString(); // create a buffer and tell it the data coming in is base64
 
-        adapter.log.debug(`Decoded Authorization ${plain_auth}`);
-        // At this point plain_auth = "username:password"
-        const creds = plain_auth.split(':');      // split on a ':'
-        username = creds[0];
-        password = creds[1];
-        if (username !== checkUser || password !== checkPass) {
-            adapter.log.warn('User credentials invalid');
-            request_valid = false;
+            adapter.log.debug(`Decoded Authorization ${plainAuth}`);
+            // At this point plainAuth = "username:password"
+            const [username, password] = plainAuth.split(':');      // split on a ':'
+            if (username !== checkUser || password !== checkPass) {
+                adapter.log.warn('User credentials invalid');
+                requestValid = false;
+            }
         }
     }
-    /*else {
-        adapter.log.warn("Authorization Header missing but user/pass defined");
-        request_valid = false;
-    }*/
-    if (!request_valid) {
+
+    if (!requestValid) {
         res.statusCode = 403;
         res.end();
         return;

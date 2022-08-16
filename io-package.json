@@ -3,18 +3,6 @@
     "name": "geofency",
     "version": "1.2.0",
     "news": {
-      "1.2.0": {
-        "en": "Added JSON config and made refactoring\nCorrected handling of SSL certificates",
-        "de": "Hinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
-        "ru": "Добавил конфиг JSON и сделал рефакторинг\nИсправлена обработка SSL сертификатов",
-        "pt": "Adicionado JSON config e feito refactoring\nManuseio correto de certificados SSL",
-        "nl": "_\nVertaling:",
-        "fr": "Ajout de la configuration JSON et refactoring\nManipulation corrigée des certificats SSL",
-        "it": "Aggiunto JSON config e fatto refactoring\nGestione corretta dei certificati SSL",
-        "es": "Añadido JSON config y hecho refactoring\nManejo corregido de certificados SSL",
-        "pl": "Added JSON konfiguje i dostosowuje do regeneracji\nPoprawne traktowanie certyfikatów SSL",
-        "zh-cn": "增加联合协商会,并重新准备\n职业证书的处理"
-      },
       "1.1.1": {
         "en": "Prevent warning logs for newly added states in last release",
         "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
