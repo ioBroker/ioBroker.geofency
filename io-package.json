@@ -155,13 +155,15 @@
   },
   "native": {
     "activate_server": true,
+    "bind": "0.0.0.0",
     "port": 7999,
     "ssl": false,
     "user": "geo",
     "pass": "geo",
     "atHome": "Home",
     "certPrivate": "",
-    "certPublic": ""
+    "certPublic": "",
+    "certChained": ""
   },
   "objects": [],
   "instanceObjects": [

@@ -59,8 +59,9 @@ function main() {
             }
 
             // Load certificates
-            adapter.getCertificates(certificates => {
+            adapter.getCertificates((error, certificates, leConfig) => {
                 adapter.config.certificates = certificates;
+                adapter.config.leConfig     = leConfig;
                 webServer = initWebServer(adapter.config);
             });
         } else {
@@ -104,12 +105,12 @@ function initWebServer(settings) {
                 return;
             }
             try {
-                server.server.listen(port);
+                server.server.listen(port, (!settings.bind || settings.bind === '0.0.0.0') ? undefined : settings.bind || undefined, () =>
+                    adapter.setState('info.connection', true, true));
             } catch (err) {
                 adapter.log.warn(`Cannot start http${settings.ssl ? 's' : ''} server: ${err.message}`);
                 return;
             }
-            adapter.setState('info.connection', true, true);
             adapter.log.info(`http${settings.ssl ? 's' : ''} server listening on port ${port}`);
         });
     }

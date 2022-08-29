@@ -17,6 +17,16 @@
       "md": 6,
       "lg": 2
     },
+    "bind": {
+      "hidden": "!data.activate_server",
+      "newLine": true,
+      "type": "ip",
+      "listenOnAllPorts": true,
+      "label": "IP",
+      "sm": 12,
+      "md": 8,
+      "lg": 4
+    },
     "port": {
       "label": "port",
       "type": "text",
