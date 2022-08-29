@@ -98,7 +98,7 @@ function initWebServer(settings) {
     }
 
     if (server.server) {
-        adapter.getPort(settings.port, port => {
+        adapter.getPort(settings.port, (!settings.bind || settings.bind === '0.0.0.0') ? undefined : settings.bind || undefined, port => {
             if (port !== settings.port && !adapter.config.findNextPort) {
                 adapter.log.error(`Cannot start http${settings.ssl ? 's' : ''} server: Port ${settings.port} already in use!`);
                 return;
