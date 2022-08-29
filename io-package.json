@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "geofency",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "news": {
+      "1.2.2": {
+        "en": "Corrected handling of SSL certificates\nAdded possibility of binding to specific interface and not only 0.0.0.0",
+        "de": "Korrigierte Handhabung von SSL-Zertifikaten\nZusätzliche Möglichkeit der Bindung an spezifische Schnittstelle und nicht nur 0.0.0.0",
+        "ru": "Исправлена обработка SSL сертификатов\nДобавлена возможность привязки к конкретному интерфейсу и не только 0.0.0.0",
+        "pt": "Manuseio correto de certificados SSL\nAdicionado possibilidade de ligação à interface específica e não apenas 0,0.0.0",
+        "nl": "Vertaling:\nToegevoegd om te binden aan specifieke interface en niet alleen 0.0",
+        "fr": "Manipulation corrigée des certificats SSL\nPossibilité de relier à une interface spécifique et non seulement 0.0.0.0",
+        "it": "Gestione corretta dei certificati SSL\nAggiunta possibilità di legame a interfaccia specifica e non solo 0.0.0.0",
+        "es": "Manejo corregido de certificados SSL\nAñadido posibilidad de unión a una interfaz específica y no sólo 0.0.0.0",
+        "pl": "Poprawne traktowanie certyfikatów SSL\nDodano możliwość wiązania do konkretnego interfejsu i nie tylko 0,0.0.0",
+        "zh-cn": "职业证书的处理\n增加对具体接口具有约束力的可能性,而不仅仅是0.0。"
+      },
       "1.2.1": {
         "en": "Corrected error with no credentials\nAdded JSON config and made refactoring\nCorrected handling of SSL certificates",
         "de": "Korrigierter Fehler ohne Anmeldeinformationen\nHinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
@@ -74,18 +86,6 @@
         "es": "prevenir advertencias con js-controller 3.2",
         "pl": "zapobiegaj ostrzeżeniom za pomocą js-controller 3.2",
         "zh-cn": "防止使用js-controller 3.2发出警告"
-      },
-      "1.0.0": {
-        "en": "js-controller 2.0 is now needed at least\nAdd more JSON decoded states\nUpdate dependencies",
-        "de": "js-controller 2.0 wird jetzt mindestens benötigt\nFügen Sie weitere JSON-dekodierte Zustände hinzu\nAbhängigkeiten aktualisieren",
-        "ru": "js-controller 2.0 теперь нужен как минимум\nДобавить дополнительные декодированные состояния JSON\nОбновить зависимости",
-        "pt": "js-controller 2.0 agora é necessário pelo menos\nAdicionar mais estados decodificados JSON\nAtualizar dependências",
-        "nl": "js-controller 2.0 is nu minimaal nodig\nVoeg meer JSON-gedecodeerde staten toe\nUpdate afhankelijkheden",
-        "fr": "js-controller 2.0 est maintenant nécessaire au moins\nAjouter plus d'états décodés JSON\nMettre à jour les dépendances",
-        "it": "js-controller 2.0 è ora necessario almeno\nAggiungi altri stati decodificati JSON\nAggiorna le dipendenze",
-        "es": "js-controller 2.0 ahora se necesita al menos\nAgregar más estados decodificados JSON\nActualizar dependencias",
-        "pl": "js-controller 2.0 jest teraz potrzebny przynajmniej\nDodaj więcej stanów zdekodowanych w formacie JSON\nZaktualizuj zależności",
-        "zh-cn": "现在至少需要js-controller 2.0\n添加更多JSON解码状态\n更新依赖"
       }
     },
     "title": "Geofency",
