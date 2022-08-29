@@ -150,7 +150,7 @@ function requestProcessor(req, res) {
     }
 
     if (!requestValid) {
-        res.statusCode = 403;
+        res.statusCode = 401;
         res.end();
         return;
     }
