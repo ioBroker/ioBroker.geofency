@@ -157,7 +157,7 @@ function requestProcessor(req, res) {
     if (req.method === 'POST') {
         let body = '';
 
-        adapter.log.debug(`request path:${req.path}`);
+        adapter.log.debug(`request url: ${req.url}`);
 
         req.on('data', chunk => body += chunk);
 

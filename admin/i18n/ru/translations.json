@@ -5,7 +5,7 @@
   "port": "Порт",
   "ssl": "Использовать SSL(https://)",
   "user": "Пользователь",
-  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Установите имя пользователя и пароль для аутентификации вашего устройства Geofency. Используйте те же значения в настройках веб-перехватчика мобильного приложения.",
+  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Установите имя пользователя и пароль для аутентификации вашего устройства Geofency. Используйте те же значения в настройках веб-перехватчика мобильного приложения. iOS App 7.5.1+!",
   "Geofency is listening for events on this port": "Geofency прослушивает события на этом порту",
   "Geofency mobile app": "Мобильное приложение \"Geofency\"",
   "Download geofency for your device": "Загрузите Geofency для своего устройства",

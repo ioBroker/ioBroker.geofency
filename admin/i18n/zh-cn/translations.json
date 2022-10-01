@@ -5,7 +5,7 @@
   "port": "港口",
   "ssl": "使用 SSL (https://)",
   "user": "用户",
-  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "设置用户名和密码以验证您的地理围栏设备。在您的移动应用 webhook 设置中使用相同的值。",
+  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "设置用户名和密码以验证您的地理围栏设备。在您的移动应用 webhook 设置中使用相同的值。iOS App 7.5.1+!",
   "Geofency is listening for events on this port": "Geofency 正在侦听此端口上的事件",
   "Geofency mobile app": "地理围栏移动应用",
   "Download geofency for your device": "为您的设备下载地理围栏",

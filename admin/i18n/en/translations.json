@@ -8,7 +8,7 @@
   "Private certificate": "Private certificate",
   "Public certificate": "Public certificate",
   "Chained certificate": "Chained certificate",
-  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Set username and password for authentication of your Geofency device. Use the same values in your mobile app webhook settings.",
+  "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Set username and password for authentication of your Geofency device. Use the same values in your mobile app webhook settings. Requires iOS App 7.5.1 or higher!",
   "Geofency is listening for events on this port": "Geofency is listening for events on this port",
   "Geofency mobile app": "Geofency mobile app",
   "Download geofency for your device": "Download Geofency for your device",
