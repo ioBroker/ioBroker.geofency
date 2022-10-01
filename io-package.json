@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "geofency",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "news": {
+      "1.2.3": {
+        "en": "Optimize usage of credentials (requires iOS App 7.5.1+!)",
+        "de": "Optimieren Sie die Nutzung von Anmeldeinformationen (erfordert iOS App 7.5.1)+",
+        "ru": "Оптимизация использования учетных записей (требуется iOS App 7.5.1)+",
+        "pt": "Otimize o uso de credenciais (requer iOS App 7.5.1)+",
+        "nl": "Beperk het gebruik van de referenties",
+        "fr": "Optimiser l'utilisation des pouvoirs (oblige iOS App 7.5.1)+",
+        "it": "Ottimizzare l'utilizzo delle credenziali (richiede iOS App 7.5.1)+",
+        "es": "Optimizar el uso de credenciales (requiere iOS App 7.5.1)+",
+        "pl": "Optimizuje użycie grzebienia (wymaga iOS App 7.5.1+",
+        "zh-cn": "全权证书的利用(预订7.5.1)+"
+      },
       "1.2.2": {
         "en": "Corrected handling of SSL certificates\nAdded possibility of binding to specific interface and not only 0.0.0.0",
         "de": "Korrigierte Handhabung von SSL-Zertifikaten\nZusätzliche Möglichkeit der Bindung an spezifische Schnittstelle und nicht nur 0.0.0.0",
@@ -74,18 +86,6 @@
         "es": "optimizar el manejo de la parada para finalizar realmente el servidor",
         "pl": "optymalizuj obsługę zatrzymań, aby naprawdę zakończyć działanie serwera",
         "zh-cn": "优化停止处理以真正结束服务器"
-      },
-      "1.0.1": {
-        "en": "prevent warnings with js-controller 3.2",
-        "de": "Warnungen mit js-controller verhindern 3.2",
-        "ru": "предотвратить предупреждения с помощью js-controller 3.2",
-        "pt": "evitar avisos com js-controller 3.2",
-        "nl": "waarschuwingen voorkomen met js-controller 3.2",
-        "fr": "éviter les avertissements avec js-controller 3.2",
-        "it": "prevenire avvisi con js-controller 3.2",
-        "es": "prevenir advertencias con js-controller 3.2",
-        "pl": "zapobiegaj ostrzeżeniom za pomocą js-controller 3.2",
-        "zh-cn": "防止使用js-controller 3.2发出警告"
       }
     },
     "title": "Geofency",

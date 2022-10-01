@@ -32,8 +32,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-
-### __WORK IN PROGRESS__
+### 1.2.3 (2022-10-01)
 * (Apollon77) Optimize usage of credentials (requires iOS App 7.5.1+!)
 
 ### 1.2.2 (2022-08-29)
