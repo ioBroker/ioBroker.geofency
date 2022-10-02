@@ -194,6 +194,9 @@ async function handleWebhookRequest(user, jbody) {
         await createObjects(id, jbody);
         objectsInitialized[id] = true;
     }
+    if (jBody.entry !== undefined) {
+        jBody.entry = !!parseInt(jBody.entry, 10);
+    }
     await setStates(id, jbody);
     await setAtHome(user, jbody);
 }
@@ -203,11 +206,11 @@ const stateAtHomeCount = 'atHomeCount';
 const stateAtHome = 'atHome';
 
 async function setStates(id, jBody) {
-    adapter.setState(id + '.entry', {val: jBody.entry == '1', ack: true});
+    adapter.setState(id + '.entry', {val: jBody.entry, ack: true});
 
     const ts = adapter.formatDate(new Date(jBody.date), 'YYYY-MM-DD hh:mm:ss');
     await adapter.setStateAsync(`${id}.date`, {val: ts, ack: true});
-    await adapter.setStateAsync(`${id}.${lastStateNames[jBody.entry == '1' ? 1 : 0]}`, {val: ts, ack: true});
+    await adapter.setStateAsync(`${id}.${lastStateNames[jBody.entry ? 1 : 0]}`, {val: ts, ack: true});
     await adapter.setStateAsync(`${id}.motion`, {val: jBody.motion, ack: true});
     await adapter.setStateAsync(`${id}.name`, {val: jBody.name, ack: true});
     await adapter.setStateAsync(`${id}.currentLatitude`, {val: jBody.latitude, ack: true});
@@ -310,7 +313,7 @@ async function createObjects(id, body) {
 }
 
 async function setAtHome(userName, body) {
-    if (body.name.toLowerCase() !== adapter.config.atHome.toLowerCase()) {
+    if (body.name.toLowerCase().trim() !== adapter.config.atHome.toLowerCase().trim()) {
         return;
     }
     let atHomeCount;
@@ -322,7 +325,7 @@ async function setAtHome(userName, body) {
     const _stateAtHome = await adapter.getStateAsync(stateAtHome);
     atHome = _stateAtHome ? (_stateAtHome.val ? JSON.parse(_stateAtHome.val) : []) : [];
 
-    if (body.entry === '1') {
+    if (body.entry) {
         if (!atHome.includes(userName)) {
             atHome.push(userName);
             await adapter.setStateAsync(stateAtHome, JSON.stringify(atHome), true);
