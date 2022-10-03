@@ -194,8 +194,8 @@ async function handleWebhookRequest(user, jbody) {
         await createObjects(id, jbody);
         objectsInitialized[id] = true;
     }
-    if (jBody.entry !== undefined) {
-        jBody.entry = !!parseInt(jBody.entry, 10);
+    if (jbody.entry !== undefined) {
+        jbody.entry = !!parseInt(jbody.entry, 10);
     }
     await setStates(id, jbody);
     await setAtHome(user, jbody);
