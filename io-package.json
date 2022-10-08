@@ -1,220 +1,220 @@
 {
-    "common": {
-        "name": "geofency",
-        "version": "1.2.3",
-        "news": {
-            "1.2.3": {
-                "en": "Optimize usage of credentials (requires iOS App 7.5.1+!)",
-                "de": "Optimieren Sie die Nutzung von Anmeldeinformationen (erfordert iOS App 7.5.1)+",
-                "ru": "Оптимизация использования учетных записей (требуется iOS App 7.5.1)+",
-                "pt": "Otimize o uso de credenciais (requer iOS App 7.5.1)+",
-                "nl": "Beperk het gebruik van de referenties",
-                "fr": "Optimiser l'utilisation des pouvoirs (oblige iOS App 7.5.1)+",
-                "it": "Ottimizzare l'utilizzo delle credenziali (richiede iOS App 7.5.1)+",
-                "es": "Optimizar el uso de credenciales (requiere iOS App 7.5.1)+",
-                "pl": "Optimizuje użycie grzebienia (wymaga iOS App 7.5.1+",
-                "zh-cn": "全权证书的利用(预订7.5.1)+"
-            },
-            "1.2.2": {
-                "en": "Corrected handling of SSL certificates\nAdded possibility of binding to specific interface and not only 0.0.0.0",
-                "de": "Korrigierte Handhabung von SSL-Zertifikaten\nZusätzliche Möglichkeit der Bindung an spezifische Schnittstelle und nicht nur 0.0.0.0",
-                "ru": "Исправлена обработка SSL сертификатов\nДобавлена возможность привязки к конкретному интерфейсу и не только 0.0.0.0",
-                "pt": "Manuseio correto de certificados SSL\nAdicionado possibilidade de ligação à interface específica e não apenas 0,0.0.0",
-                "nl": "Vertaling:\nToegevoegd om te binden aan specifieke interface en niet alleen 0.0",
-                "fr": "Manipulation corrigée des certificats SSL\nPossibilité de relier à une interface spécifique et non seulement 0.0.0.0",
-                "it": "Gestione corretta dei certificati SSL\nAggiunta possibilità di legame a interfaccia specifica e non solo 0.0.0.0",
-                "es": "Manejo corregido de certificados SSL\nAñadido posibilidad de unión a una interfaz específica y no sólo 0.0.0.0",
-                "pl": "Poprawne traktowanie certyfikatów SSL\nDodano możliwość wiązania do konkretnego interfejsu i nie tylko 0,0.0.0",
-                "zh-cn": "职业证书的处理\n增加对具体接口具有约束力的可能性,而不仅仅是0.0。"
-            },
-            "1.2.1": {
-                "en": "Corrected error with no credentials\nAdded JSON config and made refactoring\nCorrected handling of SSL certificates",
-                "de": "Korrigierter Fehler ohne Anmeldeinformationen\nHinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
-                "ru": "Исправлена ошибка без учетных данных\nДобавил конфиг JSON и сделал рефакторинг\nИсправлена обработка SSL сертификатов",
-                "pt": "Erro corrigido sem credenciais\nAdicionado JSON config e feito refactoring\nManuseio correto de certificados SSL",
-                "nl": "Gecorrigeerde fout zonder referenties\n_\nVertaling:",
-                "fr": "Erreur corrigée sans accréditation\nAjout de la configuration JSON et refactoring\nManipulation corrigée des certificats SSL",
-                "it": "Errore corretto senza credenziali\nAggiunto JSON config e fatto refactoring\nGestione corretta dei certificati SSL",
-                "es": "Error corregido sin credenciales\nAñadido JSON config y hecho refactoring\nManejo corregido de certificados SSL",
-                "pl": "Nieprawdopodobny błąd bez grzebienia\nAdded JSON konfiguje i dostosowuje do regeneracji\nPoprawne traktowanie certyfikatów SSL",
-                "zh-cn": "没有全权证书的更正错误\n增加联合协商会,并重新准备\n职业证书的处理"
-            },
-            "1.1.1": {
-                "en": "Prevent warning logs for newly added states in last release",
-                "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
-                "ru": "Предотвратить ведение журналов предупреждений для вновь добавленных состояний в последнем выпуске",
-                "pt": "Impedir logs de aviso para estados recém-adicionados na última versão",
-                "nl": "Voorkom waarschuwingslogboeken voor nieuw toegevoegde statussen in de laatste release",
-                "fr": "Empêcher les journaux d'avertissement pour les états nouvellement ajoutés dans la dernière version",
-                "it": "Impedisci i registri di avviso per i nuovi stati aggiunti nell'ultima versione",
-                "es": "Evite los registros de advertencia para los estados recién agregados en la última versión",
-                "pl": "Zapobiegaj dziennikom ostrzeżeń dla nowo dodanych stanów w ostatniej wersji",
-                "zh-cn": "防止上一个版本中新添加状态的警告日志"
-            },
-            "1.1.0": {
-                "en": "IMPORTANT: Forbidden characters are now replaced by _ in generated State IDs. Because gave an error before should not be breaking \nAdd new json state with the json of the last incoming data\nAdd new data channel under the user with all data fields from the incoming data as own states\nAdd Sentry for crash-reporting\nPrevent some error cases reported",
-                "de": "WICHTIG: Verbotene Zeichen werden jetzt in generierten Status-IDs durch _ ersetzt. Weil vorher ein Fehler auftrat, sollte es nicht brechen\nFügen Sie einen neuen JSON-Status mit dem JSON der letzten eingehenden Daten hinzu\nNeuen Datenkanal unter dem Benutzer mit allen Datenfeldern aus den eingehenden Daten als eigene Zustände hinzufügen\nFügen Sie Sentry für die Absturzmeldung hinzu\nEinige gemeldete Fehlerfälle verhindern",
-                "ru": "ВАЖНО: Запрещенные символы теперь заменяются на _ в сгенерированных идентификаторах состояний. Потому что выдал ошибку раньше, не должно быть взлома\nДобавить новое состояние json с json последних входящих данных\nДобавить новый канал данных под пользователем со всеми полями данных из входящих данных как собственные состояния\nДобавьте Sentry для отчетов о сбоях\nПредотвращение некоторых зарегистрированных случаев ошибок",
-                "pt": "IMPORTANTE: Os caracteres proibidos agora são substituídos por _ nos IDs de estado gerados. Porque deu um erro antes não deveria estar quebrando\nAdicione um novo estado json com o json dos últimos dados recebidos\nAdicione um novo canal de dados no usuário com todos os campos de dados dos dados recebidos como estados próprios\nAdicionar Sentinela para relatório de falhas\nPrevenir alguns casos de erro relatados",
-                "nl": "BELANGRIJK: Verboden tekens worden nu vervangen door _ in gegenereerde status-ID's. Omdat eerder een fout is gegeven, mag dit niet breken\nNieuwe json-status toevoegen met de json van de laatste inkomende gegevens\nVoeg een nieuw datakanaal toe onder de gebruiker met alle datavelden van de inkomende data als eigen toestanden\nSentry toevoegen voor crashrapportage\nVoorkom enkele gerapporteerde foutgevallen",
-                "fr": "IMPORTANT : Les caractères interdits sont désormais remplacés par _ dans les ID d'état générés. Parce que donné une erreur avant ne devrait pas être cassé\nAjouter un nouvel état json avec le json des dernières données entrantes\nAjouter un nouveau canal de données sous l'utilisateur avec tous les champs de données des données entrantes comme états propres\nAjouter Sentry pour les rapports de plantage\nEmpêcher certains cas d'erreur signalés",
-                "it": "IMPORTANTE: i caratteri proibiti sono ora sostituiti da _ negli ID di stato generati. Perché ha dato un errore prima non dovrebbe rompersi\nAggiungi un nuovo stato json con il json degli ultimi dati in entrata\nAggiungi un nuovo canale dati sotto l'utente con tutti i campi dati dai dati in entrata come stati propri\nAggiungi Sentry per la segnalazione degli arresti anomali\nPrevenire alcuni casi di errore segnalati",
-                "es": "IMPORTANTE: Los caracteres prohibidos ahora se reemplazan por _ en los ID de estado generados. Porque dio un error antes no debería estar rompiendo\nAgregue un nuevo estado json con el json de los últimos datos entrantes\nAgregue un nuevo canal de datos debajo del usuario con todos los campos de datos de los datos entrantes como estados propios\nAgregar Sentry para informes de fallas\nEvitar algunos casos de error informados",
-                "pl": "WAŻNE: Zakazane znaki są teraz zastępowane przez _ w wygenerowanych identyfikatorach stanu. Bo dał błąd wcześniej nie powinien być zepsuty\nDodaj nowy stan json z jsonem ostatnich przychodzących danych\nDodaj nowy kanał danych pod użytkownikiem ze wszystkimi polami danych z przychodzących danych jako własnymi stanami\nDodaj Sentry do zgłaszania awarii\nZapobiegaj zgłaszaniu niektórych błędów",
-                "zh-cn": "重要提示：在生成的状态 ID 中，禁用字符现在被 _ 替换。因为之前给出了错误不应该被打破\n使用最后传入数据的 json 添加新的 json 状态\n在用户下添加新的数据通道，将传入数据中的所有数据字段作为自己的状态\n为崩溃报告添加哨兵\n防止报告一些错误情况"
-            },
-            "1.0.3": {
-                "en": "Fix port checks",
-                "de": "Portprüfungen korrigieren",
-                "ru": "Исправить проверки портов",
-                "pt": "Corrigir verificações de porta",
-                "nl": "Herstel poortcontroles",
-                "fr": "Corriger les vérifications des ports",
-                "it": "Correggere i controlli delle porte",
-                "es": "Corregir comprobaciones de puertos",
-                "pl": "Napraw kontrole portów",
-                "zh-cn": "修复端口检查"
-            },
-            "1.0.2": {
-                "en": "optimize stop handling to really end the server",
-                "de": "Optimieren Sie die Stop-Behandlung, um den Server wirklich zu beenden",
-                "ru": "оптимизировать обработку останова, чтобы действительно завершить работу сервера",
-                "pt": "otimizar o manuseio de parada para realmente encerrar o servidor",
-                "nl": "optimaliseer de stopafhandeling om de server echt te beëindigen",
-                "fr": "optimiser la gestion des arrêts pour vraiment mettre fin au serveur",
-                "it": "ottimizzare la gestione delle interruzioni per terminare davvero il server",
-                "es": "optimizar el manejo de la parada para finalizar realmente el servidor",
-                "pl": "optymalizuj obsługę zatrzymań, aby naprawdę zakończyć działanie serwera",
-                "zh-cn": "优化停止处理以真正结束服务器"
-            }
-        },
-        "title": "Geofency",
-        "titleLang": {
-            "en": "Geofency",
-            "de": "Geofency",
-            "ru": "геозона",
-            "pt": "Geofence",
-            "nl": "Geofence",
-            "fr": "Géorepérage",
-            "it": "Geofence",
-            "es": "geocerca",
-            "pl": "Geofency",
-            "zh-cn": "地理围栏"
-        },
-        "desc": {
-            "en": "listening for geofency events. Based on the location based mobile App (Geofency)",
-            "de": "Hören auf Geofency-Ereignisse. Basierend auf der standortbasierten mobilen App (Geofency)",
-            "ru": "прослушивание событий геозоны. На основе мобильного приложения на основе местоположения (Geofency)",
-            "pt": "ouvindo eventos de geofence. Com base no aplicativo móvel baseado em localização (Geofency)",
-            "nl": "luisteren naar geofency-gebeurtenissen. Gebaseerd op de locatiegebaseerde mobiele app (Geofency)",
-            "fr": "à l'écoute des événements de geofency. Basé sur l'application mobile basée sur la localisation (Geofency)",
-            "it": "ascolto di eventi di geofency. Basato sull'app mobile basata sulla posizione (Geofency)",
-            "es": "escucha de eventos de geocercas. Basado en la aplicación móvil basada en la ubicación (Geofency)",
-            "pl": "nasłuchiwanie wydarzeń geofence. Na podstawie aplikacji mobilnej opartej na lokalizacji (Geofency)",
-            "zh-cn": "监听 geofency 事件。基于基于位置的移动应用程序（Geofency）"
-        },
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "geofency.png",
-        "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
-        "readme": "https://github.com/ioBroker/ioBroker.geofency/blob/master/README.md",
-        "license": "MIT",
-        "type": "geoposition",
-        "keywords": [
-            "iobroker",
-            "server",
-            "geofency",
-            "mobile app"
-        ],
-        "loglevel": "info",
-        "enabled": true,
-        "localLink": "http://%ip%:%port%",
-        "messagebox": true,
-        "subscribe": "messagebox",
-        "authors": [
-            "Daniel Schaedler <daniel.schaedler@gmail.com>",
-            "Apollon77 <ingo@fischer-ka.de>"
-        ],
-        "connectionType": "cloud",
-        "dataSource": "push",
-        "tier": 2,
-        "compact": true,
-        "dependencies": [
-            {
-                "js-controller": ">=2.0.0"
-            }
-        ],
-        "plugins": {
-            "sentry": {
-                "dsn": "https://0b29504f564a4bd4a05592560cf12f7f@sentry.iobroker.net/176"
-            }
-        },
-        "adminUI": {
-            "config": "json"
-        }
+  "common": {
+    "name": "geofency",
+    "version": "1.2.4",
+    "news": {
+      "1.2.4": {
+        "en": "Fix atHome states\nCatch errors when creating webserver",
+        "de": "Fix beiHome-Staaten\nFangfehler beim Erstellen von Webserver",
+        "ru": "Fix atГлавные состояния\nПоймать ошибки при создании веб-сервера",
+        "pt": "Fix atHome estados\nPegar erros ao criar webserver",
+        "nl": "Vertaling:\nVang fouten als het creëren van webserver",
+        "fr": "Fix atHome états\nAtteindre les erreurs lors de la création de webserver",
+        "it": "Fissare gli stati aHome\nCattura gli errori quando si crea webserver",
+        "es": "Estados fijos en el hogar\nCaptura errores al crear servidor web",
+        "pl": "Fix w USA\nCatch error while creating webserverwerver (ang.)",
+        "zh-cn": "希米州\n创建网站时的错误"
+      },
+      "1.2.3": {
+        "en": "Optimize usage of credentials (requires iOS App 7.5.1+!)",
+        "de": "Optimieren Sie die Nutzung von Anmeldeinformationen (erfordert iOS App 7.5.1)+",
+        "ru": "Оптимизация использования учетных записей (требуется iOS App 7.5.1)+",
+        "pt": "Otimize o uso de credenciais (requer iOS App 7.5.1)+",
+        "nl": "Beperk het gebruik van de referenties",
+        "fr": "Optimiser l'utilisation des pouvoirs (oblige iOS App 7.5.1)+",
+        "it": "Ottimizzare l'utilizzo delle credenziali (richiede iOS App 7.5.1)+",
+        "es": "Optimizar el uso de credenciales (requiere iOS App 7.5.1)+",
+        "pl": "Optimizuje użycie grzebienia (wymaga iOS App 7.5.1+",
+        "zh-cn": "全权证书的利用(预订7.5.1)+"
+      },
+      "1.2.2": {
+        "en": "Corrected handling of SSL certificates\nAdded possibility of binding to specific interface and not only 0.0.0.0",
+        "de": "Korrigierte Handhabung von SSL-Zertifikaten\nZusätzliche Möglichkeit der Bindung an spezifische Schnittstelle und nicht nur 0.0.0.0",
+        "ru": "Исправлена обработка SSL сертификатов\nДобавлена возможность привязки к конкретному интерфейсу и не только 0.0.0.0",
+        "pt": "Manuseio correto de certificados SSL\nAdicionado possibilidade de ligação à interface específica e não apenas 0,0.0.0",
+        "nl": "Vertaling:\nToegevoegd om te binden aan specifieke interface en niet alleen 0.0",
+        "fr": "Manipulation corrigée des certificats SSL\nPossibilité de relier à une interface spécifique et non seulement 0.0.0.0",
+        "it": "Gestione corretta dei certificati SSL\nAggiunta possibilità di legame a interfaccia specifica e non solo 0.0.0.0",
+        "es": "Manejo corregido de certificados SSL\nAñadido posibilidad de unión a una interfaz específica y no sólo 0.0.0.0",
+        "pl": "Poprawne traktowanie certyfikatów SSL\nDodano możliwość wiązania do konkretnego interfejsu i nie tylko 0,0.0.0",
+        "zh-cn": "职业证书的处理\n增加对具体接口具有约束力的可能性,而不仅仅是0.0。"
+      },
+      "1.2.1": {
+        "en": "Corrected error with no credentials\nAdded JSON config and made refactoring\nCorrected handling of SSL certificates",
+        "de": "Korrigierter Fehler ohne Anmeldeinformationen\nHinzugefügt JSON config und gemacht Refactoring\nKorrigierte Handhabung von SSL-Zertifikaten",
+        "ru": "Исправлена ошибка без учетных данных\nДобавил конфиг JSON и сделал рефакторинг\nИсправлена обработка SSL сертификатов",
+        "pt": "Erro corrigido sem credenciais\nAdicionado JSON config e feito refactoring\nManuseio correto de certificados SSL",
+        "nl": "Gecorrigeerde fout zonder referenties\n_\nVertaling:",
+        "fr": "Erreur corrigée sans accréditation\nAjout de la configuration JSON et refactoring\nManipulation corrigée des certificats SSL",
+        "it": "Errore corretto senza credenziali\nAggiunto JSON config e fatto refactoring\nGestione corretta dei certificati SSL",
+        "es": "Error corregido sin credenciales\nAñadido JSON config y hecho refactoring\nManejo corregido de certificados SSL",
+        "pl": "Nieprawdopodobny błąd bez grzebienia\nAdded JSON konfiguje i dostosowuje do regeneracji\nPoprawne traktowanie certyfikatów SSL",
+        "zh-cn": "没有全权证书的更正错误\n增加联合协商会,并重新准备\n职业证书的处理"
+      },
+      "1.1.1": {
+        "en": "Prevent warning logs for newly added states in last release",
+        "de": "Warnungsprotokolle für neu hinzugefügte Zustände in der letzten Version verhindern",
+        "ru": "Предотвратить ведение журналов предупреждений для вновь добавленных состояний в последнем выпуске",
+        "pt": "Impedir logs de aviso para estados recém-adicionados na última versão",
+        "nl": "Voorkom waarschuwingslogboeken voor nieuw toegevoegde statussen in de laatste release",
+        "fr": "Empêcher les journaux d'avertissement pour les états nouvellement ajoutés dans la dernière version",
+        "it": "Impedisci i registri di avviso per i nuovi stati aggiunti nell'ultima versione",
+        "es": "Evite los registros de advertencia para los estados recién agregados en la última versión",
+        "pl": "Zapobiegaj dziennikom ostrzeżeń dla nowo dodanych stanów w ostatniej wersji",
+        "zh-cn": "防止上一个版本中新添加状态的警告日志"
+      },
+      "1.1.0": {
+        "en": "IMPORTANT: Forbidden characters are now replaced by _ in generated State IDs. Because gave an error before should not be breaking \nAdd new json state with the json of the last incoming data\nAdd new data channel under the user with all data fields from the incoming data as own states\nAdd Sentry for crash-reporting\nPrevent some error cases reported",
+        "de": "WICHTIG: Verbotene Zeichen werden jetzt in generierten Status-IDs durch _ ersetzt. Weil vorher ein Fehler auftrat, sollte es nicht brechen\nFügen Sie einen neuen JSON-Status mit dem JSON der letzten eingehenden Daten hinzu\nNeuen Datenkanal unter dem Benutzer mit allen Datenfeldern aus den eingehenden Daten als eigene Zustände hinzufügen\nFügen Sie Sentry für die Absturzmeldung hinzu\nEinige gemeldete Fehlerfälle verhindern",
+        "ru": "ВАЖНО: Запрещенные символы теперь заменяются на _ в сгенерированных идентификаторах состояний. Потому что выдал ошибку раньше, не должно быть взлома\nДобавить новое состояние json с json последних входящих данных\nДобавить новый канал данных под пользователем со всеми полями данных из входящих данных как собственные состояния\nДобавьте Sentry для отчетов о сбоях\nПредотвращение некоторых зарегистрированных случаев ошибок",
+        "pt": "IMPORTANTE: Os caracteres proibidos agora são substituídos por _ nos IDs de estado gerados. Porque deu um erro antes não deveria estar quebrando\nAdicione um novo estado json com o json dos últimos dados recebidos\nAdicione um novo canal de dados no usuário com todos os campos de dados dos dados recebidos como estados próprios\nAdicionar Sentinela para relatório de falhas\nPrevenir alguns casos de erro relatados",
+        "nl": "BELANGRIJK: Verboden tekens worden nu vervangen door _ in gegenereerde status-ID's. Omdat eerder een fout is gegeven, mag dit niet breken\nNieuwe json-status toevoegen met de json van de laatste inkomende gegevens\nVoeg een nieuw datakanaal toe onder de gebruiker met alle datavelden van de inkomende data als eigen toestanden\nSentry toevoegen voor crashrapportage\nVoorkom enkele gerapporteerde foutgevallen",
+        "fr": "IMPORTANT : Les caractères interdits sont désormais remplacés par _ dans les ID d'état générés. Parce que donné une erreur avant ne devrait pas être cassé\nAjouter un nouvel état json avec le json des dernières données entrantes\nAjouter un nouveau canal de données sous l'utilisateur avec tous les champs de données des données entrantes comme états propres\nAjouter Sentry pour les rapports de plantage\nEmpêcher certains cas d'erreur signalés",
+        "it": "IMPORTANTE: i caratteri proibiti sono ora sostituiti da _ negli ID di stato generati. Perché ha dato un errore prima non dovrebbe rompersi\nAggiungi un nuovo stato json con il json degli ultimi dati in entrata\nAggiungi un nuovo canale dati sotto l'utente con tutti i campi dati dai dati in entrata come stati propri\nAggiungi Sentry per la segnalazione degli arresti anomali\nPrevenire alcuni casi di errore segnalati",
+        "es": "IMPORTANTE: Los caracteres prohibidos ahora se reemplazan por _ en los ID de estado generados. Porque dio un error antes no debería estar rompiendo\nAgregue un nuevo estado json con el json de los últimos datos entrantes\nAgregue un nuevo canal de datos debajo del usuario con todos los campos de datos de los datos entrantes como estados propios\nAgregar Sentry para informes de fallas\nEvitar algunos casos de error informados",
+        "pl": "WAŻNE: Zakazane znaki są teraz zastępowane przez _ w wygenerowanych identyfikatorach stanu. Bo dał błąd wcześniej nie powinien być zepsuty\nDodaj nowy stan json z jsonem ostatnich przychodzących danych\nDodaj nowy kanał danych pod użytkownikiem ze wszystkimi polami danych z przychodzących danych jako własnymi stanami\nDodaj Sentry do zgłaszania awarii\nZapobiegaj zgłaszaniu niektórych błędów",
+        "zh-cn": "重要提示：在生成的状态 ID 中，禁用字符现在被 _ 替换。因为之前给出了错误不应该被打破\n使用最后传入数据的 json 添加新的 json 状态\n在用户下添加新的数据通道，将传入数据中的所有数据字段作为自己的状态\n为崩溃报告添加哨兵\n防止报告一些错误情况"
+      },
+      "1.0.3": {
+        "en": "Fix port checks",
+        "de": "Portprüfungen korrigieren",
+        "ru": "Исправить проверки портов",
+        "pt": "Corrigir verificações de porta",
+        "nl": "Herstel poortcontroles",
+        "fr": "Corriger les vérifications des ports",
+        "it": "Correggere i controlli delle porte",
+        "es": "Corregir comprobaciones de puertos",
+        "pl": "Napraw kontrole portów",
+        "zh-cn": "修复端口检查"
+      }
     },
-    "native": {
-        "activate_server": true,
-        "bind": "0.0.0.0",
-        "port": 7999,
-        "ssl": false,
-        "user": "geo",
-        "pass": "geo",
-        "atHome": "Home",
-        "certPrivate": "",
-        "certPublic": "",
-        "certChained": ""
+    "title": "Geofency",
+    "titleLang": {
+      "en": "Geofency",
+      "de": "Geofency",
+      "ru": "геозона",
+      "pt": "Geofence",
+      "nl": "Geofence",
+      "fr": "Géorepérage",
+      "it": "Geofence",
+      "es": "geocerca",
+      "pl": "Geofency",
+      "zh-cn": "地理围栏"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Server Adapter is ready to get data",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "atHome",
-            "type": "state",
-            "common": {
-                "name": "atHome",
-                "type": "string",
-                "role": "state",
-                "read": true,
-                "write": false,
-                "def": "",
-                "desc": "Present persons"
-            },
-            "native": {}
-        },
-        {
-            "_id": "atHomeCount",
-            "type": "state",
-            "common": {
-                "name": "atHomeCount",
-                "type": "number",
-                "role": "state",
-                "read": true,
-                "write": false,
-                "def": 0,
-                "desc": "Number of present persons"
-            },
-            "native": {}
-        }
-    ]
+    "desc": {
+      "en": "listening for geofency events. Based on the location based mobile App (Geofency)",
+      "de": "Hören auf Geofency-Ereignisse. Basierend auf der standortbasierten mobilen App (Geofency)",
+      "ru": "прослушивание событий геозоны. На основе мобильного приложения на основе местоположения (Geofency)",
+      "pt": "ouvindo eventos de geofence. Com base no aplicativo móvel baseado em localização (Geofency)",
+      "nl": "luisteren naar geofency-gebeurtenissen. Gebaseerd op de locatiegebaseerde mobiele app (Geofency)",
+      "fr": "à l'écoute des événements de geofency. Basé sur l'application mobile basée sur la localisation (Geofency)",
+      "it": "ascolto di eventi di geofency. Basato sull'app mobile basata sulla posizione (Geofency)",
+      "es": "escucha de eventos de geocercas. Basado en la aplicación móvil basada en la ubicación (Geofency)",
+      "pl": "nasłuchiwanie wydarzeń geofence. Na podstawie aplikacji mobilnej opartej na lokalizacji (Geofency)",
+      "zh-cn": "监听 geofency 事件。基于基于位置的移动应用程序（Geofency）"
+    },
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "geofency.png",
+    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
+    "readme": "https://github.com/ioBroker/ioBroker.geofency/blob/master/README.md",
+    "license": "MIT",
+    "type": "geoposition",
+    "keywords": [
+      "iobroker",
+      "server",
+      "geofency",
+      "mobile app"
+    ],
+    "loglevel": "info",
+    "enabled": true,
+    "localLink": "http://%ip%:%port%",
+    "messagebox": true,
+    "subscribe": "messagebox",
+    "authors": [
+      "Daniel Schaedler <daniel.schaedler@gmail.com>",
+      "Apollon77 <ingo@fischer-ka.de>"
+    ],
+    "connectionType": "cloud",
+    "dataSource": "push",
+    "tier": 2,
+    "compact": true,
+    "dependencies": [
+      {
+        "js-controller": ">=2.0.0"
+      }
+    ],
+    "plugins": {
+      "sentry": {
+        "dsn": "https://0b29504f564a4bd4a05592560cf12f7f@sentry.iobroker.net/176"
+      }
+    },
+    "adminUI": {
+      "config": "json"
+    }
+  },
+  "native": {
+    "activate_server": true,
+    "bind": "0.0.0.0",
+    "port": 7999,
+    "ssl": false,
+    "user": "geo",
+    "pass": "geo",
+    "atHome": "Home",
+    "certPrivate": "",
+    "certPublic": "",
+    "certChained": ""
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Server Adapter is ready to get data",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    },
+    {
+      "_id": "atHome",
+      "type": "state",
+      "common": {
+        "name": "atHome",
+        "type": "string",
+        "role": "state",
+        "read": true,
+        "write": false,
+        "def": "",
+        "desc": "Present persons"
+      },
+      "native": {}
+    },
+    {
+      "_id": "atHomeCount",
+      "type": "state",
+      "common": {
+        "name": "atHomeCount",
+        "type": "number",
+        "role": "state",
+        "read": true,
+        "write": false,
+        "def": 0,
+        "desc": "Number of present persons"
+      },
+      "native": {}
+    }
+  ]
 }
