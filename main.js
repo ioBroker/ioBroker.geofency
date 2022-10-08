@@ -86,11 +86,23 @@ function initWebServer(settings) {
             }
         }
 
-        if (settings.ssl) {
-            server.server = require('https').createServer(adapter.config.certificates, requestProcessor);
-        } else {
-            server.server = require('http').createServer(requestProcessor);
+        try {
+            if (settings.ssl) {
+                server.server = require('https').createServer(adapter.config.certificates, requestProcessor);
+            } else {
+                server.server = require('http').createServer(requestProcessor);
+            }
+        } catch (err) {
+            adapter.log.error(`Cannot create web-server: ${err}`);
+            adapter.terminate ? adapter.terminate(utils.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION) : process.exit(utils.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
+            return;
         }
+        if (!server.server) {
+            adapter.log.error(`Cannot create web-server`);
+            adapter.terminate ? adapter.terminate(utils.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION) : process.exit(utils.EXIT_CODES.ADAPTER_REQUESTED_TERMINATION);
+            return;
+        }
+
 
         server.server.__server = server;
     } else {
