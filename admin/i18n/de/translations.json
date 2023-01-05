@@ -15,5 +15,5 @@
     "password": "Passwort",
     "port": "Port",
     "ssl": "SSL (https://) verwenden",
-    "user": "Benutzer"
+    "user": "Benutzername"
 }
