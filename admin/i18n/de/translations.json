@@ -2,7 +2,7 @@
     "-> Post Format: JSON-encoded: enabled": "-> Post-Format: JSON-kodiert: aktiviert",
     "-> URL for entry and exit: <your ioBroker Domain>:<port from above>/<any location name>": "-> URL für Ein- und Ausstieg: <Ihre ioBroker-Domain>:<Port von oben>/<beliebiger Standortname>",
     "-> authentication: set user / password from above": "-> Authentifizierung: Benutzer / Passwort von oben setzen. Benötigt iOS App 7.5.1 oder höher!",
-    "Chained certificate": "Chained Zertifikat",
+    "Chained certificate": "Verkettetes Zertifikat",
     "Download geofency for your device": "Geofency für Ihr Gerät herunterladen",
     "For any new location -> properties -> webhook settings:": "Für jeden neuen Standort -> Eigenschaften -> Webhook-Einstellungen:",
     "Geofency is listening for events on this port": "Geofency überwacht diesen Port auf Ereignisse",
