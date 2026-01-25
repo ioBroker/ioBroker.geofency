@@ -121,7 +121,6 @@
     "license": "MIT",
     "type": "geoposition",
     "keywords": [
-      "iobroker",
       "server",
       "geofency",
       "mobile app"
