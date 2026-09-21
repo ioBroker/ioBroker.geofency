@@ -118,7 +118,10 @@
     "icon": "geofency.png",
     "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.geofency/master/admin/geofency.png",
     "readme": "https://github.com/ioBroker/ioBroker.geofency/blob/master/README.md",
-    "license": "MIT",
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
     "type": "geoposition",
     "keywords": [
       "iobroker",
