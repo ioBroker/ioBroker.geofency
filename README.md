@@ -118,7 +118,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2022 dschaedl <daniel.schaedler@gmail.com>, iobroker-community
+Copyright (c) 2015-2026 dschaedl <daniel.schaedler@gmail.com>, iobroker-community
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
