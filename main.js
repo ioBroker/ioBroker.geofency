@@ -88,9 +88,9 @@ function initWebServer(settings) {
 
         try {
             if (settings.ssl) {
-                server.server = require('https').createServer(adapter.config.certificates, requestProcessor);
+                server.server = require('node:https').createServer(adapter.config.certificates, requestProcessor);
             } else {
-                server.server = require('http').createServer(requestProcessor);
+                server.server = require('node:http').createServer(requestProcessor);
             }
         } catch (err) {
             adapter.log.error(`Cannot create web-server: ${err}`);
