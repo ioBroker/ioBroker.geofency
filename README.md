@@ -114,6 +114,8 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 ### 0.0.1
 * (dschaedl) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 The MIT License (MIT)
