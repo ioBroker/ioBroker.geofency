@@ -12,7 +12,7 @@
     "Set username and password for authentication of your geofency device. Use the same values in your mobile app webhook settings.": "Imposta nome utente e password per l'autenticazione del tuo dispositivo di Geofency. Usa gli stessi valori nelle impostazioni del webhook dell'app mobile. iOS App 7.5.1+!",
     "activate_server": "Attiva Server",
     "atHome": "Nome di casa",
-    "password": "Parola d'ordine",
+    "password": "Password",
     "port": "Porta",
     "ssl": "Usa SSL (https://)",
     "user": "Utente"
