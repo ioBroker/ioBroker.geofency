@@ -35,6 +35,7 @@ Some kind of WAF/proxy/entry Server should be put before ioBroker. (e.g. nginx i
 
 ### **WORK IN PROGRESS**
 - (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+* (GermanBluefox) Added responsive sizes (xs/xl) to jsonConfig (#109)
 
 ### 1.2.4 (2022-10-08)
 * (Apollon77) Fix atHome states
